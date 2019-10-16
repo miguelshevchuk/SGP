@@ -4,6 +4,10 @@ import java.util.List;
 
 public class Laboratorista extends Rol {
 
+	public Laboratorista() {
+		super("Laboratorista");
+	}
+
 	private List<String> tareasDisponibles;
 
 	@Override

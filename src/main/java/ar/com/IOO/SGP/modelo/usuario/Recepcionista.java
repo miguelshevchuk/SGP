@@ -4,6 +4,10 @@ import java.util.List;
 
 public class Recepcionista extends Rol {
 
+	public Recepcionista() {
+		super("Recepcionista");
+	}
+
 	private List<String> tareasDisponibles;
 
 	@Override
