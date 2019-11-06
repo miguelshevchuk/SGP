@@ -1,6 +1,10 @@
-package ar.com.IOO.SGP.grafico;
+package ar.com.IOO.SGP.grafico.usuario;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+
+import ar.com.IOO.SGP.excepcion.PermisoDenegadoException;
+import ar.com.IOO.SGP.grafico.BasePanel;
+
 import javax.swing.JButton;
 
 public class PanelBajaUsuario extends BasePanel {
@@ -8,7 +12,7 @@ public class PanelBajaUsuario extends BasePanel {
 	/**
 	 * 
 	 */
-	private UsuarioTableModel FUsuarioModel = new UsuarioTableModel();
+	private UsuarioTableModel FUsuarioModel;
 	
 	private static final long serialVersionUID = -5291893986739050156L;
 	private JTable table;
@@ -17,6 +21,13 @@ public class PanelBajaUsuario extends BasePanel {
 	 * Create the panel.
 	 */
 	public PanelBajaUsuario() {
+		
+		try {
+			this.FUsuarioModel = new UsuarioTableModel();
+		} catch (PermisoDenegadoException e) {
+			this.mostrarError(e);
+		}
+		
 		setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();

@@ -16,6 +16,12 @@ import javax.swing.JTextField;
 
 import ar.com.IOO.SGP.controlador.ControladorUsuario;
 import ar.com.IOO.SGP.excepcion.BaseException;
+import ar.com.IOO.SGP.excepcion.PermisoDenegadoException;
+import ar.com.IOO.SGP.grafico.usuario.PanelAltaUsuario;
+import ar.com.IOO.SGP.grafico.usuario.PanelBajaUsuario;
+import ar.com.IOO.SGP.grafico.usuario.PanelModifUsuario;
+import ar.com.IOO.SGP.grafico.usuario.UsuarioTableModel;
+
 import javax.swing.JList;
 import javax.swing.JTable;
 import java.awt.Color;
@@ -77,10 +83,14 @@ public class Vista {
 		tabbedPane_1.addTab("Baja", null, panel_1, null);
 //		panel_1.setLayout(null);
 		
-		table = new JTable(new UsuarioTableModel());
+		try {
+			table = new JTable(new UsuarioTableModel());
+		} catch (PermisoDenegadoException e) {
+//			JOptionPane.showMessageDialog(this, e.getDescripcion());
+		}
 		panel_1.add(table);
 		
-		JPanel panel_2 = new JPanel();
+		JPanel panel_2 = new PanelModifUsuario();
 		tabbedPane_1.addTab("Modificacion", null, panel_2, null);
 		panel_2.setLayout(null);
 		

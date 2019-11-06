@@ -16,23 +16,26 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
-import ar.com.IOO.SGP.modelo.Paciente;
-
-public abstract class BaseDAO {
+public abstract class BaseDAO<TIPO> {
 	
+	final Class<TIPO> tipoDeDato;
 	protected String rutaArchivo;
 	
-	public BaseDAO(String nombreArchivo) {
+	public BaseDAO(String nombreArchivo, Class<TIPO> typeParameterClass) {
 		this.rutaArchivo = "./datos/"+nombreArchivo;
+		this.tipoDeDato = typeParameterClass;
 	}
 
-	protected void insertar(Object unObjeto){
+	protected void insertar(TIPO unObjeto){
 		File archivo = new File(this.rutaArchivo);
 		FileWriter fileWriter; 
+		
+		List<TIPO> registrosGuardados = this.traerRegistros();
+		registrosGuardados.add(unObjeto);
 		BufferedWriter bwEscritor; 
 		String texto;
 		Gson g = new Gson();
-		texto = g.toJson(unObjeto);
+		texto = g.toJson(registrosGuardados);
 		//grabo el String
 		try{
 			//Este bloque de codigo obligatoriamente debe ir dentro de un try.
@@ -46,7 +49,7 @@ public abstract class BaseDAO {
 		}
 	}	
 	
-	protected List<Object> traerRegistros(Object unObjeto){
+	protected List<TIPO> traerRegistros(){
 		String cadena;
         File archivo = new File(this.rutaArchivo);
         FileReader f;
@@ -54,13 +57,12 @@ public abstract class BaseDAO {
 			f = new FileReader(archivo);
 	        BufferedReader b = new BufferedReader(f);
 	        cadena = b.readLine();
-	        System.out.println(cadena);
 	        JsonParser parser = new JsonParser();
 	        JsonArray gsonArr = parser.parse(cadena).getAsJsonArray();
 	        Gson g = new Gson();
-	        List<Object> datos = new ArrayList<Object>();
+	        List<TIPO> datos = new ArrayList<TIPO>();
 	        for(JsonElement js : gsonArr) //System.out.println(js.toString());
-	        	datos.add(g.fromJson(js, Paciente.class));
+	        		datos.add(g.fromJson(js, this.tipoDeDato));
 	        
 	        b.close();
 	        

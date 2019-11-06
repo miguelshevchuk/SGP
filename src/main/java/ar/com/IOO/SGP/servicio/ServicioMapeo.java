@@ -42,6 +42,18 @@ public class ServicioMapeo {
 		return usuario;
 	}
 	
+	public UsuarioDTO mapear(Usuario unUsuario){
+		UsuarioDTO usuario = new UsuarioDTO();
+		usuario.setDni(unUsuario.getDni());
+		usuario.setNombre(unUsuario.getNombre());
+		usuario.setUserName(unUsuario.getUserName());
+		usuario.setPassword(unUsuario.getPassword());
+		
+		usuario.setRol(unUsuario.getRol().getNombreRol());
+		
+		return usuario;
+	}
+	
 	
 	
 	

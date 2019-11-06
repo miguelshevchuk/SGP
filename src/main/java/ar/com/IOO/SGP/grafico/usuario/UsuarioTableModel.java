@@ -1,9 +1,12 @@
-package ar.com.IOO.SGP.grafico;
+package ar.com.IOO.SGP.grafico.usuario;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
+import ar.com.IOO.SGP.controlador.ControladorUsuario;
 import ar.com.IOO.SGP.dto.UsuarioDTO;
+import ar.com.IOO.SGP.excepcion.PermisoDenegadoException;
 
 public class UsuarioTableModel extends AbstractTableModel {
 	/**
@@ -14,16 +17,19 @@ public class UsuarioTableModel extends AbstractTableModel {
 	protected String[] columnNames = new String[] { "DNI", "Nombre", "Rol"}; 
 	protected Class[] columnClasses = new Class[] { String.class, String.class, String.class}; 
 	
-	public UsuarioTableModel()
+	public UsuarioTableModel() throws PermisoDenegadoException
 	{
-		UsuarioDTO unUsuario = new UsuarioDTO();
-		unUsuario.setDni("37558355");
-		unUsuario.setNombre("Miguel Shevchuk");
-		unUsuario.setRol("Administrador");
 		
-		this.lista.add(unUsuario);
-		this.lista.add(unUsuario);
-		this.lista.add(unUsuario);
+//		for(UsuarioDTO unU)
+//		
+//		UsuarioDTO unUsuario = new UsuarioDTO();
+//		unUsuario.setDni("37558355");
+//		unUsuario.setNombre("Miguel Shevchuk");
+//		unUsuario.setRol("Administrador");
+		
+			this.lista.addAll(ControladorUsuario.getInstancia().buscarUsuarios());
+//		this.lista.add(unUsuario);
+//		this.lista.add(unUsuario);
 	}
 	public String getColumnName(int col) { return columnNames[col]; } 
 	public Class getColumnClass(int col) { return columnClasses[col]; } 

@@ -1,4 +1,4 @@
-package ar.com.IOO.SGP.grafico;
+package ar.com.IOO.SGP.grafico.usuario;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +10,8 @@ import javax.swing.JTextField;
 
 import ar.com.IOO.SGP.controlador.ControladorUsuario;
 import ar.com.IOO.SGP.excepcion.BaseException;
+import ar.com.IOO.SGP.grafico.BasePanel;
+import ar.com.IOO.SGP.servicio.ROLEnum;
 
 public class PanelAltaUsuario extends BasePanel {
 	
@@ -62,8 +64,8 @@ public class PanelAltaUsuario extends BasePanel {
 		lblRol.setBounds(315, 129, 61, 16);
 		this.add(lblRol);
 		
-		String [] roles = new String[] {"Recepcionista", "Laborista",
-        "Administrador"};
+		String [] roles = new String[] {ROLEnum.REC.getCodigo(), ROLEnum.LAB.getCodigo(),
+				ROLEnum.ADM.getCodigo()};
 		
 		JComboBox<String> rolAlta = new JComboBox(roles);
 		rolAlta.setBounds(315, 158, 205, 27);
