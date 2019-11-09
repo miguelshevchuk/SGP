@@ -1,19 +1,21 @@
 package ar.com.IOO.SGP.grafico.usuario;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import ar.com.IOO.SGP.grafico.BasePanel;
-
-import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import ar.com.IOO.SGP.controlador.ControladorUsuario;
+import ar.com.IOO.SGP.dto.UsuarioDTO;
+import ar.com.IOO.SGP.excepcion.BaseException;
+import ar.com.IOO.SGP.excepcion.ErrorGenericoException;
+import ar.com.IOO.SGP.excepcion.PermisoDenegadoException;
+import ar.com.IOO.SGP.excepcion.RegistroInexistenteException;
+import ar.com.IOO.SGP.grafico.BasePanel;
 
 public class PanelModifUsuario extends BasePanel {
 
@@ -90,7 +92,21 @@ public class PanelModifUsuario extends BasePanel {
 		JButton btnModificar = new JButton("Modificar");
 		btnModificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				panel.setVisible(false);
+				UsuarioDTO usuarioModificado = new UsuarioDTO();
+				usuarioModificado.setDni(textField.getText());
+				usuarioModificado.setUserName(textField_1.getText());
+				usuarioModificado.setPassword(textField_2.getText());
+				usuarioModificado.setNombre(textField_3.getText());
+				
+				try {
+					ControladorUsuario.getInstancia().modificarUsuario(usuarioModificado);
+					mostrarOk();
+					textField.enable();
+					panel.setVisible(false);
+				} catch (BaseException e1) {
+					mostrarError(e1);
+				}
+				
 			}
 		});
 		btnModificar.setBounds(16, 161, 117, 29);
@@ -99,7 +115,17 @@ public class PanelModifUsuario extends BasePanel {
 		JButton btnCargarDatos = new JButton("Cargar datos");
 		btnCargarDatos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				panel.setVisible(true);
+				UsuarioDTO usuario;
+				try {
+					usuario = ControladorUsuario.getInstancia().buscarUsuario(textField.getText());
+					textField_1.setText(usuario.getUserName());
+					textField_2.setText(usuario.getPassword());
+					textField_3.setText(usuario.getNombre());
+					textField.disable();
+					panel.setVisible(true);
+				} catch (BaseException e1) {
+					mostrarError(e1);
+				}
 			}
 		});
 		btnCargarDatos.setBounds(181, 37, 117, 29);

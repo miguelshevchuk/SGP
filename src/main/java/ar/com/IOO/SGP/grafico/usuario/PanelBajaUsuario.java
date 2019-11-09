@@ -1,11 +1,15 @@
 package ar.com.IOO.SGP.grafico.usuario;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import ar.com.IOO.SGP.excepcion.PermisoDenegadoException;
+import ar.com.IOO.SGP.controlador.ControladorUsuario;
+import ar.com.IOO.SGP.dto.UsuarioDTO;
+import ar.com.IOO.SGP.excepcion.BaseException;
 import ar.com.IOO.SGP.grafico.BasePanel;
-
-import javax.swing.JButton;
 
 public class PanelBajaUsuario extends BasePanel {
 
@@ -24,16 +28,16 @@ public class PanelBajaUsuario extends BasePanel {
 		
 		try {
 			this.FUsuarioModel = new UsuarioTableModel();
-		} catch (PermisoDenegadoException e) {
+		} catch (BaseException e) {
 			this.mostrarError(e);
 		}
 		
-		setLayout(null);
+		getContentPane().setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setLocation(10, 111);
 		scrollPane.setSize(587, 194);
-		add(scrollPane);
+		getContentPane().add(scrollPane);
 		
 		table = new JTable();
 		table.setModel(FUsuarioModel);
@@ -41,8 +45,26 @@ public class PanelBajaUsuario extends BasePanel {
 		scrollPane.setViewportView(table);
 		
 		JButton btnEliminar = new JButton("Eliminar");
+		btnEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				UsuarioDTO usuarioBaja = new UsuarioDTO();
+				usuarioBaja.setDni(table.getValueAt(table.getSelectedRow(), 0).toString());
+				
+				try {
+					ControladorUsuario.getInstancia().eliminarUsuario(usuarioBaja);
+					
+					table.setModel(new UsuarioTableModel());
+					
+					mostrarOk();
+				} catch (BaseException e1) {
+					mostrarError(e1);
+				}
+				
+			}
+		});
 		btnEliminar.setBounds(10, 317, 117, 29);
-		add(btnEliminar);
+		getContentPane().add(btnEliminar);
 
 	}
 }

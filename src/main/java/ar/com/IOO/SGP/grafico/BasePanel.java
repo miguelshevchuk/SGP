@@ -1,11 +1,11 @@
 package ar.com.IOO.SGP.grafico;
 
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 import ar.com.IOO.SGP.excepcion.BaseException;
 
-public abstract class BasePanel extends JPanel{
+public abstract class BasePanel extends JInternalFrame{
 
 	/**
 	 * 
@@ -14,6 +14,10 @@ public abstract class BasePanel extends JPanel{
 
 	protected void mostrarError(BaseException excepcion) {
 		JOptionPane.showMessageDialog(this, excepcion.getDescripcion());
+	}
+	
+	protected void mostrarOk() {
+		JOptionPane.showMessageDialog(this, "La operacion se realizo con exito");
 	}
 	
 }

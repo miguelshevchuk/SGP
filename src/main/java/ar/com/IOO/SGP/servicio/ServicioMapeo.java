@@ -31,12 +31,14 @@ public class ServicioMapeo {
 		usuario.setUserName(unUsuario.getUserName());
 		usuario.setPassword(unUsuario.getPassword());
 		
-		if(unUsuario.getRol().equals("Administrador")) {
-			usuario.setRol(new Administrador());
-		}else if(unUsuario.getRol().equals("Recepcionista")) {
-			usuario.setRol(new Recepcionista());
-		}else {
-			usuario.setRol(new Laboratorista());
+		if(unUsuario.getRol() != null) {
+			if(unUsuario.getRol().equals("Administrador")) {
+				usuario.setRol(new Administrador());
+			}else if(unUsuario.getRol().equals("Recepcionista")) {
+				usuario.setRol(new Recepcionista());
+			}else {
+				usuario.setRol(new Laboratorista());
+			}
 		}
 		
 		return usuario;

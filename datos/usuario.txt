@@ -1,1 +1,1 @@
-[{"userName":"Miguel","password":"","rol":{"nombreRol":"Laboratorista"},"dni":"23123"},{"userName":"Miguel2","password":"","rol":{"nombreRol":"Laboratorista"},"dni":"23123"},{"userName":"Miguel3","password":"","rol":{"nombreRol":"Laboratorista"},"dni":"23123"}]
+[{"userName":"shevchum","password":"1234","rol":{"nombreRol":"Recepcionista"},"dni":"1","nombre":"Miguel2"}]

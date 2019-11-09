@@ -94,7 +94,12 @@ public class PanelAltaUsuario extends BasePanel {
 		btnAgregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try{
-					controladorUsuario.grabarUsuario(nombreAlta.getText(), dniAlta.getText(), passAlta.getText(), rolAlta.getSelectedItem().toString(), nombreAlta.getText());
+					controladorUsuario.grabarUsuario(usuarioAlta.getText(), dniAlta.getText(), passAlta.getText(), rolAlta.getSelectedItem().toString(), nombreAlta.getText());
+					usuarioAlta.setText("");
+					dniAlta.setText("");
+					passAlta.setText("");
+					nombreAlta.setText("");
+					mostrarOk();
 				}catch(BaseException e1) {
 					mostrarError(e1);
 				}
