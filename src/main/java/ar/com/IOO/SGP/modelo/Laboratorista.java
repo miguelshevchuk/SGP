@@ -1,4 +1,4 @@
-package ar.com.IOO.SGP.modelo.usuario;
+package ar.com.IOO.SGP.modelo;
 
 import java.util.List;
 

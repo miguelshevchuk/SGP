@@ -6,8 +6,8 @@ import org.junit.Test;
 
 import ar.com.IOO.SGP.dao.UsuarioDAO;
 import ar.com.IOO.SGP.excepcion.BaseException;
-import ar.com.IOO.SGP.modelo.usuario.Administrador;
-import ar.com.IOO.SGP.modelo.usuario.Usuario;
+import ar.com.IOO.SGP.modelo.Administrador;
+import ar.com.IOO.SGP.modelo.Usuario;
 
 public class UsuarioDAOTest {
 

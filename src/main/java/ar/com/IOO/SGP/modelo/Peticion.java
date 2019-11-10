@@ -1,11 +1,8 @@
-package ar.com.IOO.SGP.modelo.peticion;
+package ar.com.IOO.SGP.modelo;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import ar.com.IOO.SGP.modelo.Paciente;
-import ar.com.IOO.SGP.modelo.Sucursal;
 
 public class Peticion {
 

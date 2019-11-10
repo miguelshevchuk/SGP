@@ -1,7 +1,5 @@
 package ar.com.IOO.SGP.modelo;
 
-import ar.com.IOO.SGP.modelo.usuario.Usuario;
-
 public class Sucursal {
 
 	private Integer numero;

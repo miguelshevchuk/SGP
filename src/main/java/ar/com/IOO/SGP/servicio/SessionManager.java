@@ -1,8 +1,8 @@
 package ar.com.IOO.SGP.servicio;
 
-import ar.com.IOO.SGP.modelo.usuario.Administrador;
-import ar.com.IOO.SGP.modelo.usuario.Rol;
-import ar.com.IOO.SGP.modelo.usuario.Usuario;
+import ar.com.IOO.SGP.modelo.Administrador;
+import ar.com.IOO.SGP.modelo.Rol;
+import ar.com.IOO.SGP.modelo.Usuario;
 
 public class SessionManager {
 

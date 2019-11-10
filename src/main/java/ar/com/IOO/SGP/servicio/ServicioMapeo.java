@@ -3,17 +3,29 @@ package ar.com.IOO.SGP.servicio;
 import ar.com.IOO.SGP.dto.PacienteDTO;
 import ar.com.IOO.SGP.dto.PeticionDTO;
 import ar.com.IOO.SGP.dto.UsuarioDTO;
+import ar.com.IOO.SGP.modelo.Administrador;
+import ar.com.IOO.SGP.modelo.Laboratorista;
 import ar.com.IOO.SGP.modelo.Paciente;
-import ar.com.IOO.SGP.modelo.peticion.Peticion;
-import ar.com.IOO.SGP.modelo.usuario.Administrador;
-import ar.com.IOO.SGP.modelo.usuario.Laboratorista;
-import ar.com.IOO.SGP.modelo.usuario.Recepcionista;
-import ar.com.IOO.SGP.modelo.usuario.Usuario;
+import ar.com.IOO.SGP.modelo.Peticion;
+import ar.com.IOO.SGP.modelo.Recepcionista;
+import ar.com.IOO.SGP.modelo.Usuario;
 
 public class ServicioMapeo {
 
 	public Paciente mapear(PacienteDTO unPaciente){
 		Paciente paciente = new Paciente();
+		paciente.setDni(unPaciente.getDni());
+		paciente.setNombre(unPaciente.getNombre());
+		paciente.setEdad(unPaciente.getEdad());
+		
+		return paciente;
+	}
+	
+	public PacienteDTO mapear(Paciente unPaciente){
+		PacienteDTO paciente = new PacienteDTO();
+		paciente.setDni(unPaciente.getDni());
+		paciente.setNombre(unPaciente.getNombre());
+		paciente.setEdad(unPaciente.getEdad());
 		
 		return paciente;
 	}

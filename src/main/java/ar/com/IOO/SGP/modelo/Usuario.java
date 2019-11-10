@@ -1,6 +1,4 @@
-package ar.com.IOO.SGP.modelo.usuario;
-
-import ar.com.IOO.SGP.modelo.Persona;
+package ar.com.IOO.SGP.modelo;
 
 public class Usuario extends Persona{
 

@@ -101,6 +101,7 @@ public abstract class BaseDAO<TIPO> {
 			f = new FileReader(archivo);
 	        BufferedReader b = new BufferedReader(f);
 	        cadena = b.readLine();
+	        cadena = (cadena == null)? "[]" : cadena;
 	        JsonParser parser = new JsonParser();
 	        JsonArray gsonArr = parser.parse(cadena).getAsJsonArray();
 	        Gson g = new Gson();

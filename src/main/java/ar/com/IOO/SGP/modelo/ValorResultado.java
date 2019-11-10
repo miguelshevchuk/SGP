@@ -1,4 +1,4 @@
-package ar.com.IOO.SGP.modelo.peticion;
+package ar.com.IOO.SGP.modelo;
 
 public class ValorResultado {
 

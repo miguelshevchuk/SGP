@@ -9,10 +9,10 @@ import java.util.stream.Collectors;
 import ar.com.IOO.SGP.dao.PeticionDAO;
 import ar.com.IOO.SGP.dto.PacienteDTO;
 import ar.com.IOO.SGP.dto.PeticionDTO;
+import ar.com.IOO.SGP.modelo.Peticion;
+import ar.com.IOO.SGP.modelo.Practica;
+import ar.com.IOO.SGP.modelo.PracticaPeticion;
 import ar.com.IOO.SGP.modelo.Sucursal;
-import ar.com.IOO.SGP.modelo.peticion.Peticion;
-import ar.com.IOO.SGP.modelo.peticion.Practica;
-import ar.com.IOO.SGP.modelo.peticion.PracticaPeticion;
 
 public class ServicioPeticiones extends ServicioBase{
 	

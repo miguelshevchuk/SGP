@@ -1,6 +1,6 @@
 package ar.com.IOO.SGP.dao;
 
-import ar.com.IOO.SGP.modelo.peticion.Peticion;
+import ar.com.IOO.SGP.modelo.Peticion;
 
 public class PeticionDAO {
 

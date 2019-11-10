@@ -9,7 +9,7 @@ import ar.com.IOO.SGP.excepcion.BaseException;
 import ar.com.IOO.SGP.excepcion.ErrorGenericoException;
 import ar.com.IOO.SGP.excepcion.PermisoDenegadoException;
 import ar.com.IOO.SGP.excepcion.RegistroInexistenteException;
-import ar.com.IOO.SGP.modelo.usuario.Usuario;
+import ar.com.IOO.SGP.modelo.Usuario;
 
 public class ServicioUsuarios extends ServicioBase{
 	

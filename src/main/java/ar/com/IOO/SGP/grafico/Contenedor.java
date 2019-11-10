@@ -10,6 +10,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import ar.com.IOO.SGP.grafico.paciente.AltaPaciente;
+import ar.com.IOO.SGP.grafico.paciente.BajaPaciente;
 import ar.com.IOO.SGP.grafico.usuario.PanelAltaUsuario;
 import ar.com.IOO.SGP.grafico.usuario.PanelBajaUsuario;
 import ar.com.IOO.SGP.grafico.usuario.PanelModifUsuario;
@@ -77,6 +79,33 @@ public class Contenedor extends JFrame{
 		});
 		
 		this.setJMenuBar(menuBar);
+		
+		JMenu mnPacientes = new JMenu("Pacientes");
+		menuBar.add(mnPacientes);
+		
+		JMenuItem mntmAlta_1 = new JMenuItem("Alta");
+		mntmAlta_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AltaPaciente altaPaciente = new AltaPaciente();
+				altaPaciente.setSize(900, 500);
+				desktopPane.add(altaPaciente);
+				altaPaciente.setClosable(true);
+				altaPaciente.setVisible(true);
+			}
+		});
+		mnPacientes.add(mntmAlta_1);
+		
+		JMenuItem mntmBaja_1 = new JMenuItem("Baja");
+		mntmBaja_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				BajaPaciente bajaPaciente = new BajaPaciente();
+				bajaPaciente.setSize(900, 500);
+				desktopPane.add(bajaPaciente);
+				bajaPaciente.setClosable(true);
+				bajaPaciente.setVisible(true);
+			}
+		});
+		mnPacientes.add(mntmBaja_1);
 		
 		
 	}
