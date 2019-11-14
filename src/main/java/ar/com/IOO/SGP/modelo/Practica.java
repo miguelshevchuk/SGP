@@ -1,23 +1,24 @@
 package ar.com.IOO.SGP.modelo;
 
 public class Practica {
-	private Integer codigo;
+	private String codigo;
 	private String nombre;
 	private Integer grupo;
 	private ValorResultado valoresCriticos;
 	private ValorResultado valoresReservados;
 	private Integer horasResultado;
 	private Boolean habilitada;
+	private Integer tipoResultado;
 
 	public Boolean esValorReservado(Integer unValor) {
 		return this.valoresReservados.cumpleValor(unValor);
 	}
 
-	public Integer getCodigo() {
+	public String getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(Integer codigo) {
+	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
 
@@ -69,4 +70,12 @@ public class Practica {
 		this.habilitada = habilitada;
 	}
 
+	public Integer getTipoResultado() {
+		return tipoResultado;
+	}
+
+	public void setTipoResultado(Integer tipoResultado) {
+		this.tipoResultado = tipoResultado;
+	}
+	
 }

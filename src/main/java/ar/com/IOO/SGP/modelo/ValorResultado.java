@@ -1,28 +1,17 @@
 package ar.com.IOO.SGP.modelo;
 
-public class ValorResultado {
+public abstract class ValorResultado {
+	
+	private String codigoPractica;
 
-	private Integer valorDesde;
-	private Integer valorHasta;
+	public abstract Boolean cumpleValor(Object unValor);
 
-	public Boolean cumpleValor(Integer unValor){
-		return (unValor >= valorDesde) && (unValor <= valorHasta) ;
+	public String getCodigoPractica() {
+		return codigoPractica;
+	}
+
+	public void setCodigoPractica(String codigoPractica) {
+		this.codigoPractica = codigoPractica;
 	}
 	
-	public Integer getValorDesde() {
-		return valorDesde;
-	}
-
-	public void setValorDesde(Integer valorDesde) {
-		this.valorDesde = valorDesde;
-	}
-
-	public Integer getValorHasta() {
-		return valorHasta;
-	}
-
-	public void setValorHasta(Integer valorHasta) {
-		this.valorHasta = valorHasta;
-	}
-
 }

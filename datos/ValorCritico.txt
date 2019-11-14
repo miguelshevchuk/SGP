@@ -1,0 +1,1 @@
+[{"valorDesde":1,"valorHasta":3,"codigoPractica":"asd"}]

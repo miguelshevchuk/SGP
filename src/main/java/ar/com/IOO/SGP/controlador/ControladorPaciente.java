@@ -29,17 +29,17 @@ public class ControladorPaciente {
 	public List<PacienteDTO> buscarPacientes() throws PermisoDenegadoException, ErrorGenericoException, RegistroInexistenteException, RegistroExistenteException{
 		return this.servicioPaciente.buscarPacientes();
 	}
-//	
+	
 	public void eliminar(String dni) throws PermisoDenegadoException, ErrorGenericoException, TienePeticionesCompletasException{
 		this.servicioPaciente.eliminar(dni);
 	}
-//	
-//	public UsuarioDTO buscarUsuario(String dni) throws PermisoDenegadoException, ErrorGenericoException, RegistroInexistenteException{
-//		return this.servicioUsuario.buscarUsuario(dni);
-//	}
-//	
-//	public void modificarUsuario(UsuarioDTO unUsuario) throws BaseException {
-//		this.servicioUsuario.modificar(unUsuario);
-//	}
-//	
+	
+	public PacienteDTO buscarPaciente(String dni) throws PermisoDenegadoException, ErrorGenericoException, RegistroInexistenteException{
+		return this.servicioPaciente.buscarPaciente(dni);
+	}
+	
+	public void modificar(PacienteDTO unPaciente) throws BaseException {
+		this.servicioPaciente.modificar(unPaciente);
+	}
+	
 }

@@ -30,8 +30,14 @@ public class ServicioPacientes extends ServicioBase{
 		
 	}
 	
-	public void modificarPaciente(PacienteDTO paciente) throws ErrorGenericoException{
-		this.pacienteDAO.modificarPaciente(this.servicioMapeo.mapear(paciente));
+	public void modificar(PacienteDTO paciente) throws ErrorGenericoException, RegistroInexistenteException{
+		
+		PacienteDTO pacienteGuardado = this.buscarPaciente(paciente.getDni());
+		pacienteGuardado.setNombre(paciente.getNombre());
+		pacienteGuardado.setEdad(paciente.getEdad());
+		
+		
+		this.pacienteDAO.modificarPaciente(this.servicioMapeo.mapear(pacienteGuardado));
 	}
 	
 	public void altaPaciente(PacienteDTO unPaciente) throws ErrorGenericoException, RegistroExistenteException{

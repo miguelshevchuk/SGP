@@ -12,6 +12,8 @@ import javax.swing.JMenuItem;
 
 import ar.com.IOO.SGP.grafico.paciente.AltaPaciente;
 import ar.com.IOO.SGP.grafico.paciente.BajaPaciente;
+import ar.com.IOO.SGP.grafico.paciente.ModifPaciente;
+import ar.com.IOO.SGP.grafico.practica.AltaPractica;
 import ar.com.IOO.SGP.grafico.usuario.PanelAltaUsuario;
 import ar.com.IOO.SGP.grafico.usuario.PanelBajaUsuario;
 import ar.com.IOO.SGP.grafico.usuario.PanelModifUsuario;
@@ -106,6 +108,33 @@ public class Contenedor extends JFrame{
 			}
 		});
 		mnPacientes.add(mntmBaja_1);
+		
+		JMenuItem mntmModificacion_1 = new JMenuItem("Modificacion");
+		mntmModificacion_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ModifPaciente pantalla = new ModifPaciente();
+				pantalla.setSize(900, 500);
+				desktopPane.add(pantalla);
+				pantalla.setClosable(true);
+				pantalla.setVisible(true);
+			}
+		});
+		mnPacientes.add(mntmModificacion_1);
+		
+		JMenu mnPracticas = new JMenu("Practicas");
+		menuBar.add(mnPracticas);
+		
+		JMenuItem mntmAlta_2 = new JMenuItem("Alta");
+		mntmAlta_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AltaPractica pantalla = new AltaPractica();
+				pantalla.setSize(900, 500);
+				desktopPane.add(pantalla);
+				pantalla.setClosable(true);
+				pantalla.setVisible(true);
+			}
+		});
+		mnPracticas.add(mntmAlta_2);
 		
 		
 	}
