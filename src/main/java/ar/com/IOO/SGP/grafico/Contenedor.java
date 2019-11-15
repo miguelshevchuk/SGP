@@ -14,6 +14,7 @@ import ar.com.IOO.SGP.grafico.paciente.AltaPaciente;
 import ar.com.IOO.SGP.grafico.paciente.BajaPaciente;
 import ar.com.IOO.SGP.grafico.paciente.ModifPaciente;
 import ar.com.IOO.SGP.grafico.practica.AltaPractica;
+import ar.com.IOO.SGP.grafico.practica.BajaPractica;
 import ar.com.IOO.SGP.grafico.usuario.PanelAltaUsuario;
 import ar.com.IOO.SGP.grafico.usuario.PanelBajaUsuario;
 import ar.com.IOO.SGP.grafico.usuario.PanelModifUsuario;
@@ -82,6 +83,18 @@ public class Contenedor extends JFrame{
 		
 		this.setJMenuBar(menuBar);
 		
+		JMenu mnSucursales = new JMenu("Sucursales");
+		menuBar.add(mnSucursales);
+		
+		JMenuItem mntmAlta_3 = new JMenuItem("Alta");
+		mnSucursales.add(mntmAlta_3);
+		
+		JMenuItem mntmBaja_3 = new JMenuItem("Baja");
+		mnSucursales.add(mntmBaja_3);
+		
+		JMenuItem mntmModificacion_3 = new JMenuItem("Modificacion");
+		mnSucursales.add(mntmModificacion_3);
+		
 		JMenu mnPacientes = new JMenu("Pacientes");
 		menuBar.add(mnPacientes);
 		
@@ -135,6 +148,49 @@ public class Contenedor extends JFrame{
 			}
 		});
 		mnPracticas.add(mntmAlta_2);
+		
+		JMenuItem mntmBaja_2 = new JMenuItem("Baja");
+		mntmBaja_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				BajaPractica pantalla = new BajaPractica();
+				pantalla.setSize(900, 500);
+				desktopPane.add(pantalla);
+				pantalla.setClosable(true);
+				pantalla.setVisible(true);
+				
+			}
+		});
+		mnPracticas.add(mntmBaja_2);
+		
+		JMenuItem mntmModificacion_2 = new JMenuItem("Modificacion");
+		mnPracticas.add(mntmModificacion_2);
+		
+		JMenu mnPeticiones = new JMenu("Peticiones");
+		menuBar.add(mnPeticiones);
+		
+		JMenuItem mntmAlta_4 = new JMenuItem("Alta");
+		mnPeticiones.add(mntmAlta_4);
+		
+		JMenuItem mntmBaja_4 = new JMenuItem("Baja");
+		mnPeticiones.add(mntmBaja_4);
+		
+		JMenuItem mntmModificacion_4 = new JMenuItem("Modificacion");
+		mnPeticiones.add(mntmModificacion_4);
+		
+		JMenuItem mntmConsulta = new JMenuItem("Consulta");
+		mnPeticiones.add(mntmConsulta);
+		
+		JMenu mnResultados = new JMenu("Resultados");
+		menuBar.add(mnResultados);
+		
+		JMenuItem mntmAlta_5 = new JMenuItem("Alta");
+		mnResultados.add(mntmAlta_5);
+		
+		JMenuItem mntmBaja_5 = new JMenuItem("Baja");
+		mnResultados.add(mntmBaja_5);
+		
+		JMenuItem mntmModificacion_5 = new JMenuItem("Modificacion");
+		mnResultados.add(mntmModificacion_5);
 		
 		
 	}

@@ -5,6 +5,7 @@ import java.util.List;
 
 import ar.com.IOO.SGP.dto.ComboDTO;
 import ar.com.IOO.SGP.dto.PracticaDTO;
+import ar.com.IOO.SGP.excepcion.BaseException;
 import ar.com.IOO.SGP.excepcion.ErrorGenericoException;
 import ar.com.IOO.SGP.excepcion.RegistroExistenteException;
 import ar.com.IOO.SGP.servicio.GrupoPracticaEnum;
@@ -48,6 +49,14 @@ public class ControladorPractica {
 	
 	public void alta(PracticaDTO unaPractica) throws ErrorGenericoException, RegistroExistenteException {
 		servicio.alta(unaPractica);
+	}
+	
+	public List<PracticaDTO> buscarPracticas() throws BaseException {
+		return servicio.buscarPracticas();
+	}
+	
+	public void eliminar(String codigo) throws BaseException{
+		servicio.eliminar(codigo);
 	}
 	
 }

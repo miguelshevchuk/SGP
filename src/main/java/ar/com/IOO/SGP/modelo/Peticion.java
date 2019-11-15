@@ -32,6 +32,10 @@ public class Peticion {
 		return this.practicas.stream().anyMatch(practica -> practica.tieneResultadoReservado());
 	}
 
+	public Boolean tiene(String unaPractica) {
+		return this.practicas.stream().anyMatch(practicaPeticion -> practicaPeticion.getPractica().getCodigo() == unaPractica);
+	}
+	
 	// GETTERS Y SETTERS
 
 	public Paciente getPaciente() {

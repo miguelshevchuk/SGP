@@ -1,1 +1,1 @@
-[{"userName":"shevchum","password":"1234","rol":{"nombreRol":"Recepcionista"},"dni":"1","nombre":"Miguel2"}]
+[{"userName":"shevchum","password":"1234","rol":{"nombreRol":"Recepcionista"},"dni":"1","nombre":"Miguel2"},{"userName":"asas","password":"","rol":{"nombreRol":"Administrador"},"dni":"2","nombre":"Mingo"}]

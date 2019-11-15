@@ -35,10 +35,32 @@ public abstract class BaseDAO<TIPO> {
 		this.identificador = identificador;
 	}
 
-	protected void insertar(TIPO unObjeto) throws ErrorGenericoException, RegistroExistenteException{
+//	protected void insertar(TIPO unObjeto) throws ErrorGenericoException, RegistroExistenteException{
+////		try {
+////			Method getterId = tipoDeDato.getMethod("get"+this.identificador);
+////			List<TIPO> registrosGuardados = this.traerRegistros();
+////			
+////			if(registrosGuardados.stream().anyMatch(registro -> tienenElMismoId(unObjeto, registro, getterId))) {
+////				throw new RegistroExistenteException();
+////			}
+////			
+////			registrosGuardados.add(unObjeto);
+////			escribirEnArchivo(registrosGuardados);
+////		} catch (NoSuchMethodException e) {
+////			e.printStackTrace();
+////			throw new ErrorGenericoException();
+////		} catch (SecurityException e) {
+////			e.printStackTrace();
+////			throw new ErrorGenericoException();
+////		}
+//		this.insertar(unObjeto);
+//	}
+	
+	protected <T> void insertar(T unObjeto) throws ErrorGenericoException, RegistroExistenteException{
 		try {
 			Method getterId = tipoDeDato.getMethod("get"+this.identificador);
-			List<TIPO> registrosGuardados = this.traerRegistros();
+			@SuppressWarnings("unchecked")
+			List<T> registrosGuardados = (List<T>) this.traerRegistros(unObjeto.getClass());
 			
 			if(registrosGuardados.stream().anyMatch(registro -> tienenElMismoId(unObjeto, registro, getterId))) {
 				throw new RegistroExistenteException();
@@ -56,7 +78,7 @@ public abstract class BaseDAO<TIPO> {
 		
 	}
 
-	private Boolean tienenElMismoId(TIPO unObjeto, TIPO registro, Method getterId){
+	private <T> Boolean tienenElMismoId(T unObjeto, T registro, Method getterId){
 		
 		Boolean esElMismo = Boolean.FALSE;
 		
@@ -73,7 +95,7 @@ public abstract class BaseDAO<TIPO> {
 		return esElMismo;
 	}
 
-	private void escribirEnArchivo(List<TIPO> registrosGuardados) {
+	private <T> void escribirEnArchivo(List<T> registrosGuardados) {
 		File archivo = new File(this.rutaArchivo);
 		FileWriter fileWriter;
 		BufferedWriter bwEscritor; 
@@ -94,24 +116,50 @@ public abstract class BaseDAO<TIPO> {
 	}	
 	
 	protected List<TIPO> traerRegistros() throws ErrorGenericoException{
+//		String cadena;
+//        File archivo = new File(this.rutaArchivo);
+//        FileReader f;
+//		try {
+//			f = new FileReader(archivo);
+//	        BufferedReader b = new BufferedReader(f);
+//	        cadena = b.readLine();
+//	        cadena = (cadena == null)? "[]" : cadena;
+//	        JsonParser parser = new JsonParser();
+//	        JsonArray gsonArr = parser.parse(cadena).getAsJsonArray();
+//	        Gson g = new Gson();
+//	        List<TIPO> datos = new ArrayList<TIPO>();
+//	        for(JsonElement js : gsonArr) //System.out.println(js.toString());
+//	        		datos.add(g.fromJson(js, this.tipoDeDato));
+//	        
+//	        b.close();
+//	        
+//	        return datos;
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//			throw new ErrorGenericoException();
+//		}
+		return this.traerRegistros(this.tipoDeDato);
+	}
+	
+	protected <T> List<T> traerRegistros(Class<T> tipo) throws ErrorGenericoException{
 		String cadena;
-        File archivo = new File(this.rutaArchivo);
-        FileReader f;
+		File archivo = new File(this.rutaArchivo);
+		FileReader f;
 		try {
 			f = new FileReader(archivo);
-	        BufferedReader b = new BufferedReader(f);
-	        cadena = b.readLine();
-	        cadena = (cadena == null)? "[]" : cadena;
-	        JsonParser parser = new JsonParser();
-	        JsonArray gsonArr = parser.parse(cadena).getAsJsonArray();
-	        Gson g = new Gson();
-	        List<TIPO> datos = new ArrayList<TIPO>();
-	        for(JsonElement js : gsonArr) //System.out.println(js.toString());
-	        		datos.add(g.fromJson(js, this.tipoDeDato));
-	        
-	        b.close();
-	        
-	        return datos;
+			BufferedReader b = new BufferedReader(f);
+			cadena = b.readLine();
+			cadena = (cadena == null)? "[]" : cadena;
+			JsonParser parser = new JsonParser();
+			JsonArray gsonArr = parser.parse(cadena).getAsJsonArray();
+			Gson g = new Gson();
+			List<T> datos = new ArrayList<T>();
+			for(JsonElement js : gsonArr) //System.out.println(js.toString());
+				datos.add(g.fromJson(js, tipo));
+			
+			b.close();
+			
+			return datos;
 		} catch (IOException e) {
 			e.printStackTrace();
 			throw new ErrorGenericoException();
@@ -143,12 +191,40 @@ public abstract class BaseDAO<TIPO> {
 	
 	protected Object traerRegistroPor(String id) throws ErrorGenericoException, RegistroInexistenteException {
 		
+//		try {
+//			Method getterId = tipoDeDato.getMethod("get"+this.identificador);
+//			List<TIPO> registrosGuardados = this.traerRegistros();
+//			
+//			List<TIPO> resultados = registrosGuardados.stream().filter(registro -> esElMismoRegistro(registro, id, getterId)).collect(Collectors.toList());
+//				
+//			if(resultados.isEmpty()) {
+//				throw new RegistroInexistenteException();
+//			}else {
+//				return resultados.get(0);
+//			}
+//			
+//		} catch (NoSuchMethodException e) {
+//			e.printStackTrace();
+//			throw new ErrorGenericoException();
+//		} catch (SecurityException e) {
+//			e.printStackTrace();
+//			throw new ErrorGenericoException();
+//		} catch (IllegalArgumentException e) {
+//			e.printStackTrace();
+//			throw new ErrorGenericoException();
+//		}
+		
+		return this.traerRegistroPor(id, this.tipoDeDato);
+	}
+	
+	protected <T> Object traerRegistroPor(String id, Class<T> tipo) throws ErrorGenericoException, RegistroInexistenteException {
+		
 		try {
 			Method getterId = tipoDeDato.getMethod("get"+this.identificador);
-			List<TIPO> registrosGuardados = this.traerRegistros();
+			List<T> registrosGuardados = this.traerRegistros(tipo);
 			
-			List<TIPO> resultados = registrosGuardados.stream().filter(registro -> esElMismoRegistro(registro, id, getterId)).collect(Collectors.toList());
-				
+			List<T> resultados = registrosGuardados.stream().filter(registro -> esElMismoRegistro(registro, id, getterId)).collect(Collectors.toList());
+			
 			if(resultados.isEmpty()) {
 				throw new RegistroInexistenteException();
 			}else {

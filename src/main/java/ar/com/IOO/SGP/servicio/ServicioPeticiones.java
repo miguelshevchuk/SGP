@@ -78,7 +78,19 @@ public class ServicioPeticiones extends ServicioBase{
 		return new ArrayList<Peticion>();
 	}
 	
+	private List<Peticion> buscarPeticiones(){
+		
+		//Busco la lista de peticiones en la BBDD
+		return new ArrayList<Peticion>();
+	}
 	
-	
+	public Boolean hayPeticionesDe(String unaPractica) {
+		
+		List<Peticion> peticiones = this.buscarPeticiones();
+		
+		
+		return peticiones.stream().anyMatch(peticion -> peticion.tiene(unaPractica));
+	}
+
 	
 }
