@@ -1,6 +1,9 @@
 package ar.com.IOO.SGP.dao;
 
+import java.util.List;
+
 import ar.com.IOO.SGP.excepcion.BaseException;
+import ar.com.IOO.SGP.excepcion.ErrorGenericoException;
 import ar.com.IOO.SGP.modelo.Sucursal;
 
 public class SucursalDAO extends BaseDAO<Sucursal>{
@@ -13,4 +16,19 @@ public class SucursalDAO extends BaseDAO<Sucursal>{
 		super.insertar(unaSucursal);
 	}
 	
+	public List<Sucursal> buscarSucursales() throws BaseException {
+		return super.traerRegistros();
+	}
+	
+	public Sucursal buscarSucursal(String numero) throws BaseException {
+		return (Sucursal) super.traerRegistroPor(numero);
+	}
+	
+	public void modificar(Sucursal sucursal) throws ErrorGenericoException {
+		super.modificar(sucursal);
+	}
+	
+	public void eliminar(String numero) throws ErrorGenericoException {
+		super.eliminarRegistro(numero);
+	}
 }

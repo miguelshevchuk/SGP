@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import ar.com.IOO.SGP.dao.PeticionDAO;
 import ar.com.IOO.SGP.dto.PacienteDTO;
 import ar.com.IOO.SGP.dto.PeticionDTO;
+import ar.com.IOO.SGP.dto.SucursalDTO;
 import ar.com.IOO.SGP.modelo.Peticion;
 import ar.com.IOO.SGP.modelo.Practica;
 import ar.com.IOO.SGP.modelo.PracticaPeticion;
@@ -66,6 +67,14 @@ public class ServicioPeticiones extends ServicioBase{
 		
 	}
 	
+	public Boolean tienePeticionesCompletas(SucursalDTO unaSucursal){
+		
+		List<Peticion> peticionesDeLaSucursal = this.buscarPeticionesDe(unaSucursal);
+		
+		return !filtrarPeticionesCompletas(peticionesDeLaSucursal).isEmpty();
+		
+	}
+	
 	private List<Peticion> filtrarPeticionesCompletas(List<Peticion> peticionesDelPaciente){
 		
 		return peticionesDelPaciente.stream().filter(peticion -> peticion.estaCompleta()).collect(Collectors.toList());
@@ -73,6 +82,12 @@ public class ServicioPeticiones extends ServicioBase{
 	}
 	
 	private List<Peticion> buscarPeticionesDe(PacienteDTO unPaciente){
+		
+		//Busco la lista de peticiones en la BBDD
+		return new ArrayList<Peticion>();
+	}
+	
+	private List<Peticion> buscarPeticionesDe(SucursalDTO unaSucursal){
 		
 		//Busco la lista de peticiones en la BBDD
 		return new ArrayList<Peticion>();
