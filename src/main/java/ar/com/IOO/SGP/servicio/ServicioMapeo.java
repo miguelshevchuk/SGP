@@ -3,6 +3,7 @@ package ar.com.IOO.SGP.servicio;
 import ar.com.IOO.SGP.dto.PacienteDTO;
 import ar.com.IOO.SGP.dto.PeticionDTO;
 import ar.com.IOO.SGP.dto.PracticaDTO;
+import ar.com.IOO.SGP.dto.SucursalDTO;
 import ar.com.IOO.SGP.dto.UsuarioDTO;
 import ar.com.IOO.SGP.dto.ValorDesdeHastaDTO;
 import ar.com.IOO.SGP.dto.ValorPositivoNegativoDTO;
@@ -13,6 +14,7 @@ import ar.com.IOO.SGP.modelo.Paciente;
 import ar.com.IOO.SGP.modelo.Peticion;
 import ar.com.IOO.SGP.modelo.Practica;
 import ar.com.IOO.SGP.modelo.Recepcionista;
+import ar.com.IOO.SGP.modelo.Sucursal;
 import ar.com.IOO.SGP.modelo.Usuario;
 import ar.com.IOO.SGP.modelo.ValorDesdeHasta;
 import ar.com.IOO.SGP.modelo.ValorPositivoNegativo;
@@ -185,6 +187,28 @@ public class ServicioMapeo {
 			return valorMapeado;
 		}
 		
+	}
+	
+	public SucursalDTO mapear(Sucursal unaSucursal){
+		SucursalDTO sucursalDTO = new SucursalDTO();
+		sucursalDTO.setDireccion(unaSucursal.getDireccion());
+		sucursalDTO.setNumero(unaSucursal.getNumero());
+		UsuarioDTO responsable = new UsuarioDTO();
+		responsable.setDni(unaSucursal.getResponsableTecnico().getDni());
+		sucursalDTO.setResponsableTecnico(responsable);
+		
+		return sucursalDTO;
+	}
+	
+	public Sucursal mapear(SucursalDTO unaSucursal){
+		Sucursal sucursalDTO = new Sucursal();
+		sucursalDTO.setDireccion(unaSucursal.getDireccion());
+		sucursalDTO.setNumero(unaSucursal.getNumero());
+		Usuario responsable = new Usuario();
+		responsable.setDni(unaSucursal.getResponsableTecnico().getDni());
+		sucursalDTO.setResponsableTecnico(responsable);
+		
+		return sucursalDTO;
 	}
 	
 	

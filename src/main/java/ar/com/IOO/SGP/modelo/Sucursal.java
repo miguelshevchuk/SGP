@@ -2,15 +2,15 @@ package ar.com.IOO.SGP.modelo;
 
 public class Sucursal {
 
-	private Integer numero;
+	private String numero;
 	private String direccion;
 	private Usuario responsableTecnico;
 
-	public Integer getNumero() {
+	public String getNumero() {
 		return numero;
 	}
 
-	public void setNumero(Integer numero) {
+	public void setNumero(String numero) {
 		this.numero = numero;
 	}
 

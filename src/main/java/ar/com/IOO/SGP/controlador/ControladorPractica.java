@@ -15,9 +15,13 @@ import ar.com.IOO.SGP.servicio.ServicioPracticas;
 public class ControladorPractica {
 
 	ServicioPracticas servicio = new ServicioPracticas();
+	private static ControladorPractica instancia;
 	
 	public static ControladorPractica getInstancia() {
-		return new ControladorPractica();
+		if(instancia == null) {
+			instancia = new ControladorPractica();
+		}
+		return instancia;
 	}
 	
 	public List<ComboDTO> buscarGruposPosibles(){

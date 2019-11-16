@@ -12,9 +12,13 @@ import ar.com.IOO.SGP.servicio.ServicioUsuarios;
 public class ControladorUsuario {
 	
 	private ServicioUsuarios servicioUsuario = new ServicioUsuarios();
+	private static ControladorUsuario instancia;
 	
 	public static ControladorUsuario getInstancia() {
-		return new ControladorUsuario();
+		if(instancia == null) {
+			instancia = new ControladorUsuario();
+		}
+		return instancia;
 	}
 	
 	public void grabarUsuario(String userName, String dni, String password, String rol, String nombre) throws BaseException {

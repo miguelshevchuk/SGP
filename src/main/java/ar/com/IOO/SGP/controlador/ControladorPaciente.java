@@ -16,8 +16,13 @@ public class ControladorPaciente {
 	
 	private ServicioPacientes servicioPaciente = new ServicioPacientes();
 	
+	private static ControladorPaciente instancia;
+	
 	public static ControladorPaciente getInstancia() {
-		return new ControladorPaciente();
+		if(instancia == null) {
+			instancia = new ControladorPaciente();
+		}
+		return instancia;
 	}
 	
 	public void grabar(PacienteDTO unPaciente) throws BaseException {
