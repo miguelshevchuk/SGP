@@ -257,21 +257,55 @@ public abstract class BaseDAO<TIPO> {
 		
 		return esElMismo;
 	}
-	
+//	
+//	@SuppressWarnings("unchecked")
+//	protected void modificar(Object unObjeto) throws ErrorGenericoException {
+//		Method getterId;
+//		try {
+//			getterId = tipoDeDato.getMethod("get"+this.identificador);
+//		
+//			List<TIPO> registrosGuardados = this.traerRegistros();
+//			
+//			String idObjeto = (String) getterId.invoke(unObjeto);
+//			
+//			List<TIPO> resultados = registrosGuardados.stream().filter(registro -> !esElMismoRegistro(registro, idObjeto, getterId)).collect(Collectors.toList());
+//	
+//			resultados.add((TIPO)unObjeto);
+//
+//			escribirEnArchivo(resultados);
+//			
+//		} catch (NoSuchMethodException e) {
+//			e.printStackTrace();
+//			throw new ErrorGenericoException();
+//		} catch (SecurityException e) {
+//			e.printStackTrace();
+//			throw new ErrorGenericoException();
+//		} catch (IllegalAccessException e) {
+//			e.printStackTrace();
+//			throw new ErrorGenericoException();
+//		} catch (IllegalArgumentException e) {
+//			e.printStackTrace();
+//			throw new ErrorGenericoException();
+//		} catch (InvocationTargetException e) {
+//			e.printStackTrace();
+//			throw new ErrorGenericoException();
+//		}
+//		
+//	}
 	@SuppressWarnings("unchecked")
-	protected void modificar(Object unObjeto) throws ErrorGenericoException {
+	protected <T> void modificar(T unObjeto) throws ErrorGenericoException {
 		Method getterId;
 		try {
 			getterId = tipoDeDato.getMethod("get"+this.identificador);
-		
-			List<TIPO> registrosGuardados = this.traerRegistros();
+			
+			List<T> registrosGuardados = (List<T>) this.traerRegistros(unObjeto.getClass());
 			
 			String idObjeto = (String) getterId.invoke(unObjeto);
 			
-			List<TIPO> resultados = registrosGuardados.stream().filter(registro -> !esElMismoRegistro(registro, idObjeto, getterId)).collect(Collectors.toList());
-	
-			resultados.add((TIPO)unObjeto);
-
+			List<T> resultados = registrosGuardados.stream().filter(registro -> !esElMismoRegistro(registro, idObjeto, getterId)).collect(Collectors.toList());
+			
+			resultados.add((T)unObjeto);
+			
 			escribirEnArchivo(resultados);
 			
 		} catch (NoSuchMethodException e) {

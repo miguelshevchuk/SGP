@@ -34,4 +34,10 @@ public abstract class ValorResultadoDAO extends BaseDAO<ValorResultado>{
 		
 	}
 	
+	public void modificar(ValorResultado unValor) throws ErrorGenericoException, RegistroInexistenteException {
+		
+		super.modificar(unValor);
+		
+	}
+	
 }

@@ -30,7 +30,6 @@ public class ServicioPracticas extends ServicioBase{
 		
 	}
 	
-	@SuppressWarnings("unchecked")
 	public List<PracticaDTO> buscarPracticas() throws BaseException{
 		List<Practica> practicas = practicaDAO.buscarPracticas();
 		
@@ -58,5 +57,29 @@ public class ServicioPracticas extends ServicioBase{
 		valorCriticoDAO.eliminar(codigo);
 		valorReservadoDAO.eliminar(codigo);
 		practicaDAO.eliminar(codigo);
+	}
+	
+	public PracticaDTO buscar(String unaPractica) throws ErrorGenericoException, RegistroInexistenteException {
+		
+		Practica practica = this.practicaDAO.buscar(unaPractica);
+		completarValoresPractica(practica);
+		
+		return this.servicioMapeo.mapear(practica);
+	}
+	
+	public void modificar(PracticaDTO unaPractica) throws ErrorGenericoException, RegistroInexistenteException {
+		Practica practica = this.practicaDAO.buscar(unaPractica.getCodigo());
+		completarValoresPractica(practica);
+		
+		practica.setGrupo(unaPractica.getGrupo());
+		practica.setHabilitada(unaPractica.getHabilitada());
+		practica.setHorasResultado(unaPractica.getHorasResultado());
+		practica.setNombre(unaPractica.getNombre());
+		practica.setValoresCriticos(this.servicioMapeo.mapear(unaPractica.getValoresCriticos()));
+		practica.setValoresReservados(this.servicioMapeo.mapear(unaPractica.getValoresReservados()));
+		
+		valorCriticoDAO.modificar(practica.getValoresCriticos());
+		valorReservadoDAO.modificar(practica.getValoresReservados());
+		this.practicaDAO.modificar(practica);
 	}
 }

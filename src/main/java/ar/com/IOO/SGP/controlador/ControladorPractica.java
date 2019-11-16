@@ -8,6 +8,7 @@ import ar.com.IOO.SGP.dto.PracticaDTO;
 import ar.com.IOO.SGP.excepcion.BaseException;
 import ar.com.IOO.SGP.excepcion.ErrorGenericoException;
 import ar.com.IOO.SGP.excepcion.RegistroExistenteException;
+import ar.com.IOO.SGP.excepcion.RegistroInexistenteException;
 import ar.com.IOO.SGP.servicio.GrupoPracticaEnum;
 import ar.com.IOO.SGP.servicio.ServicioPracticas;
 
@@ -57,6 +58,14 @@ public class ControladorPractica {
 	
 	public void eliminar(String codigo) throws BaseException{
 		servicio.eliminar(codigo);
+	}
+	
+	public PracticaDTO buscar(String unaPractica) throws ErrorGenericoException, RegistroInexistenteException {
+		return servicio.buscar(unaPractica);
+	}
+	
+	public void modificar(PracticaDTO unaPractica) throws ErrorGenericoException, RegistroInexistenteException {
+		servicio.modificar(unaPractica);
 	}
 	
 }

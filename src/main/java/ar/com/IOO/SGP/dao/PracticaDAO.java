@@ -4,6 +4,7 @@ import java.util.List;
 
 import ar.com.IOO.SGP.excepcion.ErrorGenericoException;
 import ar.com.IOO.SGP.excepcion.RegistroExistenteException;
+import ar.com.IOO.SGP.excepcion.RegistroInexistenteException;
 import ar.com.IOO.SGP.modelo.Practica;
 
 public class PracticaDAO extends BaseDAO<Practica>{
@@ -26,6 +27,16 @@ public class PracticaDAO extends BaseDAO<Practica>{
 	
 	public void eliminar(String codigo) throws ErrorGenericoException {
 		super.eliminarRegistro(codigo);
+	}
+	
+	public Practica buscar(String unaPractica) throws ErrorGenericoException, RegistroInexistenteException {
+		return (Practica) super.traerRegistroPor(unaPractica);
+	}
+	
+	public void modificar(Practica practica) throws ErrorGenericoException, RegistroInexistenteException {
+		practica.setValoresCriticos(null);
+		practica.setValoresReservados(null);
+		super.modificar(practica);
 	}
 	
 }

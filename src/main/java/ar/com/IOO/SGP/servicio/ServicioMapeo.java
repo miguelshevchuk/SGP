@@ -6,6 +6,7 @@ import ar.com.IOO.SGP.dto.PracticaDTO;
 import ar.com.IOO.SGP.dto.UsuarioDTO;
 import ar.com.IOO.SGP.dto.ValorDesdeHastaDTO;
 import ar.com.IOO.SGP.dto.ValorPositivoNegativoDTO;
+import ar.com.IOO.SGP.dto.ValorResultadoDTO;
 import ar.com.IOO.SGP.modelo.Administrador;
 import ar.com.IOO.SGP.modelo.Laboratorista;
 import ar.com.IOO.SGP.modelo.Paciente;
@@ -15,6 +16,7 @@ import ar.com.IOO.SGP.modelo.Recepcionista;
 import ar.com.IOO.SGP.modelo.Usuario;
 import ar.com.IOO.SGP.modelo.ValorDesdeHasta;
 import ar.com.IOO.SGP.modelo.ValorPositivoNegativo;
+import ar.com.IOO.SGP.modelo.ValorResultado;
 
 public class ServicioMapeo {
 
@@ -162,7 +164,28 @@ public class ServicioMapeo {
 		return unaPractica;
 	}
 	
-	
+	public ValorResultado mapear(ValorResultadoDTO valorResultado){
+		
+		if(valorResultado instanceof ValorDesdeHastaDTO) {
+			ValorDesdeHasta valorMapeado = new ValorDesdeHasta();
+			
+			valorMapeado.setCodigoPractica(valorResultado.getCodigoPractica());
+			
+			valorMapeado.setValorDesde(((ValorDesdeHastaDTO)valorResultado).getValorDesde());
+			
+			valorMapeado.setValorHasta(((ValorDesdeHastaDTO)valorResultado).getValorHasta());
+			
+			return valorMapeado;
+		}else {
+			ValorPositivoNegativo valorMapeado = new ValorPositivoNegativo();
+			
+			valorMapeado.setCodigoPractica(((ValorPositivoNegativoDTO)valorResultado).getCodigoPractica());
+			valorMapeado.setValor(((ValorPositivoNegativoDTO)valorResultado).getValor());
+			
+			return valorMapeado;
+		}
+		
+	}
 	
 	
 }

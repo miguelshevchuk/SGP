@@ -201,6 +201,7 @@ public class AltaPractica extends BasePanel {
 				practica.setHorasResultado(Integer.parseInt(horasResultado.getText()));
 				practica.setTipoResultado(tipoResultadoSeleccionado.getCodigo());
 				practica.setNombre(nombrePractica.getText());
+				practica.setGrupo(grupoSeleccionado.getCodigo());
 				
 				if(tipoResultadoSeleccionado.getCodigo() == 1) {
 					ValorDesdeHastaDTO valorCritico = new ValorDesdeHastaDTO();

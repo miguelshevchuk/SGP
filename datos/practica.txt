@@ -1,1 +1,1 @@
-[]
+[{"codigo":"1","nombre":"Practica 1","horasResultado":7,"habilitada":false,"tipoResultado":1}]

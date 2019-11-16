@@ -1,1 +1,1 @@
-[]
+[{"valorDesde":30,"valorHasta":40,"codigoPractica":"1"}]

@@ -15,6 +15,7 @@ import ar.com.IOO.SGP.grafico.paciente.BajaPaciente;
 import ar.com.IOO.SGP.grafico.paciente.ModifPaciente;
 import ar.com.IOO.SGP.grafico.practica.AltaPractica;
 import ar.com.IOO.SGP.grafico.practica.BajaPractica;
+import ar.com.IOO.SGP.grafico.practica.ModifPractica;
 import ar.com.IOO.SGP.grafico.usuario.PanelAltaUsuario;
 import ar.com.IOO.SGP.grafico.usuario.PanelBajaUsuario;
 import ar.com.IOO.SGP.grafico.usuario.PanelModifUsuario;
@@ -163,6 +164,15 @@ public class Contenedor extends JFrame{
 		mnPracticas.add(mntmBaja_2);
 		
 		JMenuItem mntmModificacion_2 = new JMenuItem("Modificacion");
+		mntmModificacion_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ModifPractica pantalla = new ModifPractica();
+				pantalla.setSize(900, 600);
+				desktopPane.add(pantalla);
+				pantalla.setClosable(true);
+				pantalla.setVisible(true);
+			}
+		});
 		mnPracticas.add(mntmModificacion_2);
 		
 		JMenu mnPeticiones = new JMenu("Peticiones");
