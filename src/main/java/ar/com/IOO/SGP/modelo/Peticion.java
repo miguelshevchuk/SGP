@@ -36,6 +36,14 @@ public class Peticion {
 		return this.practicas.stream().anyMatch(practicaPeticion -> practicaPeticion.getPractica().getCodigo() == unaPractica);
 	}
 	
+	public Boolean laPeticionEsDelPaciente(String unPaciente) {
+		return this.paciente.getDni() == unPaciente;
+	}
+	
+	public Boolean laPeticionEsDeLaSucursal(String numeroSucursal) {
+		return this.sucursal.getNumero() == numeroSucursal;
+	}
+	
 	// GETTERS Y SETTERS
 
 	public Paciente getPaciente() {

@@ -8,7 +8,6 @@ import ar.com.IOO.SGP.excepcion.ErrorGenericoException;
 import ar.com.IOO.SGP.excepcion.PermisoDenegadoException;
 import ar.com.IOO.SGP.excepcion.RegistroExistenteException;
 import ar.com.IOO.SGP.excepcion.RegistroInexistenteException;
-import ar.com.IOO.SGP.excepcion.TienePeticionesCompletasException;
 import ar.com.IOO.SGP.servicio.ServicioPacientes;
 
 public class ControladorPaciente {
@@ -35,7 +34,7 @@ public class ControladorPaciente {
 		return this.servicioPaciente.buscarPacientes();
 	}
 	
-	public void eliminar(String dni) throws PermisoDenegadoException, ErrorGenericoException, TienePeticionesCompletasException{
+	public void eliminar(String dni) throws BaseException{
 		this.servicioPaciente.eliminar(dni);
 	}
 	

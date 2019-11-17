@@ -30,4 +30,9 @@ public class SucursalDTO {
 		this.responsableTecnico = responsableTecnico;
 	}
 
+	@Override
+	public String toString() {
+		return numero + " - " + direccion;
+	}
+
 }

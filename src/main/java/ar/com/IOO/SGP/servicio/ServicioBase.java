@@ -5,7 +5,6 @@ import ar.com.IOO.SGP.excepcion.PermisoDenegadoException;
 public abstract class ServicioBase {
 
 	private SessionManager sessionManager = new SessionManager();
-	protected ServicioMapeo servicioMapeo = new ServicioMapeo();
 
 	protected void puedeRealizar(String unaTarea) throws PermisoDenegadoException {	
 		

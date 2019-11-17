@@ -9,6 +9,12 @@ import ar.com.IOO.SGP.modelo.Paciente;
 
 public class PacienteDAO extends BaseDAO<Paciente>{
 
+	private static PacienteDAO instancia;
+	
+	public static PacienteDAO getInstancia() {
+		return (instancia == null)? new PacienteDAO() : instancia;
+	}
+	
 	public PacienteDAO() {
 		super("paciente.txt", Paciente.class, "Dni");
 	}

@@ -13,13 +13,17 @@ import ar.com.IOO.SGP.modelo.Usuario;
 
 public class ServicioUsuarios extends ServicioBase{
 	
-	private UsuarioDAO usuarioDAO = new UsuarioDAO();
+	private static ServicioUsuarios instancia;
+	
+	public static ServicioUsuarios getInstancia() {
+		return (instancia == null)? new ServicioUsuarios() : instancia;
+	}
 	
 	public void agregarUsuario(UsuarioDTO unUsuario) throws BaseException{
 		
 		this.puedeRealizar("altaUsuario");
 		
-		this.usuarioDAO.grabar(this.servicioMapeo.mapear(unUsuario));
+		UsuarioDAO.getInstancia().grabar(ServicioMapeo.mapear(unUsuario));
 		
 	}
 	
@@ -27,8 +31,8 @@ public class ServicioUsuarios extends ServicioBase{
 		
 		List<UsuarioDTO> usuariosDTO = new ArrayList<UsuarioDTO>();
 		
-		for(Usuario unUsuario: this.usuarioDAO.buscarUsuarios()) {
-			usuariosDTO.add(this.servicioMapeo.mapear(unUsuario));
+		for(Usuario unUsuario: UsuarioDAO.getInstancia().buscarUsuarios()) {
+			usuariosDTO.add(ServicioMapeo.mapear(unUsuario));
 		}
 		
 		return usuariosDTO;
@@ -36,12 +40,12 @@ public class ServicioUsuarios extends ServicioBase{
 	}
 	
 	public void eliminarUsuario(UsuarioDTO unUsuario) throws ErrorGenericoException {
-		this.usuarioDAO.eliminar(this.servicioMapeo.mapear(unUsuario));
+		UsuarioDAO.getInstancia().eliminar(ServicioMapeo.mapear(unUsuario));
 	}
 	
 	
 	public UsuarioDTO buscarUsuario(String dni) throws ErrorGenericoException, RegistroInexistenteException {
-		return this.servicioMapeo.mapear(this.usuarioDAO.buscarUsuario(dni));
+		return ServicioMapeo.mapear(UsuarioDAO.getInstancia().buscarUsuario(dni));
 	}
 
 	public void modificar(UsuarioDTO unUsuario) throws BaseException {
@@ -50,6 +54,6 @@ public class ServicioUsuarios extends ServicioBase{
 		usuarioGuardado.setUserName(unUsuario.getUserName());
 		usuarioGuardado.setPassword(unUsuario.getPassword());
 		
-		this.usuarioDAO.modificar(this.servicioMapeo.mapear(usuarioGuardado));
+		UsuarioDAO.getInstancia().modificar(ServicioMapeo.mapear(usuarioGuardado));
 	}
 }

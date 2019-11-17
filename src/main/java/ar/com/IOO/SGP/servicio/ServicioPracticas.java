@@ -16,70 +16,72 @@ import ar.com.IOO.SGP.modelo.Practica;
 
 public class ServicioPracticas extends ServicioBase{
 
-	PracticaDAO practicaDAO = new PracticaDAO();
-	ValorCriticoDAO valorCriticoDAO = new ValorCriticoDAO();
-	ValorReservadoDAO valorReservadoDAO = new ValorReservadoDAO();
-	ServicioPeticiones servicioPeticiones = new ServicioPeticiones();
 	
+	private static ServicioPracticas instancia;
+	
+	public static ServicioPracticas getInstancia() {
+		return (instancia == null)? new ServicioPracticas() : instancia;
+	}
+
 	public void alta(PracticaDTO unaPractica) throws ErrorGenericoException, RegistroExistenteException {
-		Practica practicaParaGuardar = this.servicioMapeo.mapear(unaPractica);
+		Practica practicaParaGuardar = ServicioMapeo.mapear(unaPractica);
 		
-		valorCriticoDAO.insertar(practicaParaGuardar.getValoresCriticos());
-		valorReservadoDAO.insertar(practicaParaGuardar.getValoresReservados());
-		practicaDAO.insertar(practicaParaGuardar);
+		ValorCriticoDAO.getInstancia().insertar(practicaParaGuardar.getValoresCriticos());
+		ValorReservadoDAO.getInstancia().insertar(practicaParaGuardar.getValoresReservados());
+		PracticaDAO.getInstancia().insertar(practicaParaGuardar);
 		
 	}
 	
 	public List<PracticaDTO> buscarPracticas() throws BaseException{
-		List<Practica> practicas = practicaDAO.buscarPracticas();
+		List<Practica> practicas = PracticaDAO.getInstancia().buscarPracticas();
 		
 		for(Practica unaPractica: practicas) {
 			this.completarValoresPractica(unaPractica);
 		}
 		
-		List<PracticaDTO> practicasDTO = practicas.stream().map(unaPractica -> this.servicioMapeo.mapear(unaPractica)).collect(Collectors.toList());
+		List<PracticaDTO> practicasDTO = practicas.stream().map(unaPractica -> ServicioMapeo.mapear(unaPractica)).collect(Collectors.toList());
 	
 		return practicasDTO;
 	}
 	
 	private void completarValoresPractica(Practica unaPractica) throws ErrorGenericoException, RegistroInexistenteException {
-		unaPractica.setValoresCriticos(valorCriticoDAO.buscarPorPractica(unaPractica));
-		unaPractica.setValoresReservados(valorReservadoDAO.buscarPorPractica(unaPractica));
+		unaPractica.setValoresCriticos(ValorCriticoDAO.getInstancia().buscarPorPractica(unaPractica));
+		unaPractica.setValoresReservados(ValorReservadoDAO.getInstancia().buscarPorPractica(unaPractica));
 //		return unaPractica;
 	}
 	
 	public void eliminar(String codigo) throws BaseException {
 		
-		if(servicioPeticiones.hayPeticionesDe(codigo)) {
+		if(ServicioPeticiones.getInstancia().hayPeticionesDe(codigo)) {
 			throw new PracticaUsadaException();
 		}
 		
-		valorCriticoDAO.eliminar(codigo);
-		valorReservadoDAO.eliminar(codigo);
-		practicaDAO.eliminar(codigo);
+		ValorCriticoDAO.getInstancia().eliminar(codigo);
+		ValorReservadoDAO.getInstancia().eliminar(codigo);
+		PracticaDAO.getInstancia().eliminar(codigo);
 	}
 	
 	public PracticaDTO buscar(String unaPractica) throws ErrorGenericoException, RegistroInexistenteException {
 		
-		Practica practica = this.practicaDAO.buscar(unaPractica);
+		Practica practica = PracticaDAO.getInstancia().buscar(unaPractica);
 		completarValoresPractica(practica);
 		
-		return this.servicioMapeo.mapear(practica);
+		return ServicioMapeo.mapear(practica);
 	}
 	
 	public void modificar(PracticaDTO unaPractica) throws ErrorGenericoException, RegistroInexistenteException {
-		Practica practica = this.practicaDAO.buscar(unaPractica.getCodigo());
+		Practica practica = PracticaDAO.getInstancia().buscar(unaPractica.getCodigo());
 		completarValoresPractica(practica);
 		
 		practica.setGrupo(unaPractica.getGrupo());
 		practica.setHabilitada(unaPractica.getHabilitada());
 		practica.setHorasResultado(unaPractica.getHorasResultado());
 		practica.setNombre(unaPractica.getNombre());
-		practica.setValoresCriticos(this.servicioMapeo.mapear(unaPractica.getValoresCriticos()));
-		practica.setValoresReservados(this.servicioMapeo.mapear(unaPractica.getValoresReservados()));
+		practica.setValoresCriticos(ServicioMapeo.mapear(unaPractica.getValoresCriticos()));
+		practica.setValoresReservados(ServicioMapeo.mapear(unaPractica.getValoresReservados()));
 		
-		valorCriticoDAO.modificar(practica.getValoresCriticos());
-		valorReservadoDAO.modificar(practica.getValoresReservados());
-		this.practicaDAO.modificar(practica);
+		ValorCriticoDAO.getInstancia().modificar(practica.getValoresCriticos());
+		ValorReservadoDAO.getInstancia().modificar(practica.getValoresReservados());
+		PracticaDAO.getInstancia().modificar(practica);
 	}
 }

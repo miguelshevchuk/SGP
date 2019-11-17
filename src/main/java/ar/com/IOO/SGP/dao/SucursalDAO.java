@@ -8,6 +8,12 @@ import ar.com.IOO.SGP.modelo.Sucursal;
 
 public class SucursalDAO extends BaseDAO<Sucursal>{
 
+	private static SucursalDAO instancia;
+	
+	public static SucursalDAO getInstancia() {
+		return (instancia == null)? new SucursalDAO() : instancia;
+	}
+	
 	public SucursalDAO() {
 		super("sucursal.txt", Sucursal.class, "Numero");
 	}

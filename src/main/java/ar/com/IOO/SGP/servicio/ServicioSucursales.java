@@ -9,17 +9,20 @@ import ar.com.IOO.SGP.dto.UsuarioDTO;
 import ar.com.IOO.SGP.excepcion.BaseException;
 import ar.com.IOO.SGP.excepcion.ErrorGenericoException;
 import ar.com.IOO.SGP.excepcion.RegistroInexistenteException;
+import ar.com.IOO.SGP.excepcion.TienePeticionesCompletasException;
 import ar.com.IOO.SGP.modelo.Sucursal;
 
 public class ServicioSucursales extends ServicioBase{
 	
-	private SucursalDAO sucursalDAO = new SucursalDAO();
-	private ServicioUsuarios servicioUsuario = new ServicioUsuarios();
-	private ServicioPeticiones servicioPeticiones= new ServicioPeticiones();
+	private static ServicioSucursales instancia;
+	
+	public static ServicioSucursales getInstancia() {
+		return (instancia == null)? new ServicioSucursales() : instancia;
+	}
 	
 	public void alta(SucursalDTO unaSucursal) throws BaseException{
 		
-		this.sucursalDAO.alta(this.servicioMapeo.mapear(unaSucursal));
+		SucursalDAO.getInstancia().alta(ServicioMapeo.mapear(unaSucursal));
 		
 	}
 	
@@ -27,8 +30,8 @@ public class ServicioSucursales extends ServicioBase{
 		
 		List<SucursalDTO> sucursales = new ArrayList<SucursalDTO>();
 		
-		for(Sucursal sucursal: this.sucursalDAO.buscarSucursales()) {
-			SucursalDTO sucursalDTO = this.servicioMapeo.mapear(sucursal);
+		for(Sucursal sucursal: SucursalDAO.getInstancia().buscarSucursales()) {
+			SucursalDTO sucursalDTO = ServicioMapeo.mapear(sucursal);
 			
 			this.completarSucursal(sucursalDTO);
 			
@@ -38,9 +41,9 @@ public class ServicioSucursales extends ServicioBase{
 	}
 	
 	public SucursalDTO buscarSucursal(String numero) throws BaseException {
-		Sucursal sucursal = this.sucursalDAO.buscarSucursal(numero);
+		Sucursal sucursal = SucursalDAO.getInstancia().buscarSucursal(numero);
 		
-		SucursalDTO sucursalDTO = this.servicioMapeo.mapear(sucursal);
+		SucursalDTO sucursalDTO = ServicioMapeo.mapear(sucursal);
 		
 		this.completarSucursal(sucursalDTO);
 		
@@ -48,21 +51,27 @@ public class ServicioSucursales extends ServicioBase{
 	}
 	
 	private void completarSucursal(SucursalDTO sucursalDTO) throws ErrorGenericoException, RegistroInexistenteException {
-		UsuarioDTO responsable = this.servicioUsuario.buscarUsuario(sucursalDTO.getResponsableTecnico().getDni());
+		UsuarioDTO responsable = ServicioUsuarios.getInstancia().buscarUsuario(sucursalDTO.getResponsableTecnico().getDni());
 		sucursalDTO.setResponsableTecnico(responsable);
 	}
 	
-	public void modificar(SucursalDTO sucursal, String sucursalDestino) throws ErrorGenericoException {
+	public void modificar(SucursalDTO sucursal) throws ErrorGenericoException {
 		
-		if(servicioPeticiones.tienePeticionesCompletas(sucursal)){
-			
-		}
-		
-		this.sucursalDAO.modificar(this.servicioMapeo.mapear(sucursal));
+		SucursalDAO.getInstancia().modificar(ServicioMapeo.mapear(sucursal));
 	}
 	
-	public void eliminar(String numero) throws ErrorGenericoException {
-		this.sucursalDAO.eliminar(numero);
+	public void eliminar(String numero, String sucursalDestino) throws BaseException {
+		
+		SucursalDTO sucursalDTO = new SucursalDTO();
+		sucursalDTO.setNumero(numero);
+		
+		if(ServicioPeticiones.getInstancia().tienePeticionesCompletas(sucursalDTO)){
+			throw new TienePeticionesCompletasException();
+		}
+		
+		ServicioPeticiones.getInstancia().pasarPeticionesDe(sucursalDTO, sucursalDestino);
+		
+		SucursalDAO.getInstancia().eliminar(numero);
 	}
 
 }

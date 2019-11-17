@@ -33,12 +33,12 @@ public class ControladorSucursal {
 		return servicio.buscarSucursal(numero);
 	}
 	
-	public void modificar(SucursalDTO sucursal, String sucursalDestino) throws ErrorGenericoException {
-		servicio.modificar(sucursal, sucursalDestino);
+	public void modificar(SucursalDTO sucursal) throws ErrorGenericoException {
+		servicio.modificar(sucursal);
 	}
 	
-	public void eliminar(String numero) throws ErrorGenericoException {
-		servicio.eliminar(numero);
+	public void eliminar(String numero, String sucursalDestino) throws BaseException {
+		servicio.eliminar(numero, sucursalDestino);
 	}
 	
 	

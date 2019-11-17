@@ -9,6 +9,12 @@ import ar.com.IOO.SGP.modelo.Usuario;
 
 public class UsuarioDAO  extends BaseDAO<Usuario>{
 
+	private static UsuarioDAO instancia;
+	
+	public static UsuarioDAO getInstancia() {
+		return (instancia == null)? new UsuarioDAO() : instancia;
+	}
+	
 	public UsuarioDAO() {
 		super("usuario.txt", Usuario.class, "Dni");
 	}

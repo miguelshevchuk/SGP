@@ -1,8 +1,10 @@
 package ar.com.IOO.SGP.modelo;
 
 public class PracticaPeticion {
+	private String idPeticion;
+	private String idResultado;
 	private Practica practica;
-	private Integer resultado;
+	private Object resultado;
 
 	public Boolean tieneResultadoReservado() {
 		return this.practica.esValorReservado(this.resultado);
@@ -18,12 +20,28 @@ public class PracticaPeticion {
 		this.practica = practica;
 	}
 
-	public Integer getResultado() {
+	public Object getResultado() {
 		return resultado;
 	}
 
-	public void setResultado(Integer resultado) {
+	public void setResultado(Object resultado) {
 		this.resultado = resultado;
+	}
+
+	public String getIdPeticion() {
+		return idPeticion;
+	}
+
+	public void setIdPeticion(String idPeticion) {
+		this.idPeticion = idPeticion;
+	}
+
+	public String getIdResultado() {
+		return idResultado;
+	}
+
+	public void setIdResultado(String idResultado) {
+		this.idResultado = idResultado;
 	}
 
 }

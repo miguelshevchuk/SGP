@@ -9,6 +9,12 @@ import ar.com.IOO.SGP.modelo.Practica;
 
 public class PracticaDAO extends BaseDAO<Practica>{
 
+	private static PracticaDAO instancia;
+	
+	public static PracticaDAO getInstancia() {
+		return (instancia == null)? new PracticaDAO() : instancia;
+	}
+	
 	public PracticaDAO() {
 		super("practica.txt", Practica.class, "Codigo");
 	}

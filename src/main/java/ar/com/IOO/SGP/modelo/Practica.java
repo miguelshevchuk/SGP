@@ -10,7 +10,7 @@ public class Practica {
 	private Boolean habilitada;
 	private Integer tipoResultado;
 
-	public Boolean esValorReservado(Integer unValor) {
+	public Boolean esValorReservado(Object unValor) {
 		return this.valoresReservados.cumpleValor(unValor);
 	}
 

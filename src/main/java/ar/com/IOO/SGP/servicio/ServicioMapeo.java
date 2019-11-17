@@ -3,6 +3,7 @@ package ar.com.IOO.SGP.servicio;
 import ar.com.IOO.SGP.dto.PacienteDTO;
 import ar.com.IOO.SGP.dto.PeticionDTO;
 import ar.com.IOO.SGP.dto.PracticaDTO;
+import ar.com.IOO.SGP.dto.PracticaPeticionDTO;
 import ar.com.IOO.SGP.dto.SucursalDTO;
 import ar.com.IOO.SGP.dto.UsuarioDTO;
 import ar.com.IOO.SGP.dto.ValorDesdeHastaDTO;
@@ -13,6 +14,7 @@ import ar.com.IOO.SGP.modelo.Laboratorista;
 import ar.com.IOO.SGP.modelo.Paciente;
 import ar.com.IOO.SGP.modelo.Peticion;
 import ar.com.IOO.SGP.modelo.Practica;
+import ar.com.IOO.SGP.modelo.PracticaPeticion;
 import ar.com.IOO.SGP.modelo.Recepcionista;
 import ar.com.IOO.SGP.modelo.Sucursal;
 import ar.com.IOO.SGP.modelo.Usuario;
@@ -22,7 +24,7 @@ import ar.com.IOO.SGP.modelo.ValorResultado;
 
 public class ServicioMapeo {
 
-	public Paciente mapear(PacienteDTO unPaciente){
+	public static Paciente mapear(PacienteDTO unPaciente){
 		Paciente paciente = new Paciente();
 		paciente.setDni(unPaciente.getDni());
 		paciente.setNombre(unPaciente.getNombre());
@@ -31,7 +33,7 @@ public class ServicioMapeo {
 		return paciente;
 	}
 	
-	public PacienteDTO mapear(Paciente unPaciente){
+	public static PacienteDTO mapear(Paciente unPaciente){
 		PacienteDTO paciente = new PacienteDTO();
 		paciente.setDni(unPaciente.getDni());
 		paciente.setNombre(unPaciente.getNombre());
@@ -40,13 +42,57 @@ public class ServicioMapeo {
 		return paciente;
 	}
 	
-	public Peticion mapear(PeticionDTO unaPeticion){
+	public static Peticion mapear(PeticionDTO unaPeticion){
 		Peticion peticion = new Peticion();
+		peticion.setPaciente(mapear(unaPeticion.getPaciente()));
+		peticion.setSucursal(mapear(unaPeticion.getSucursal()));
+		peticion.setObraSocial(unaPeticion.getObraSocial());
+		peticion.setIdPeticion(unaPeticion.getIdPeticion());
+		peticion.setEstado(unaPeticion.getEstado());
+		peticion.setFechaDeCarga(unaPeticion.getFechaDeCarga());
+		
+		for(PracticaPeticionDTO practicaPeticion: unaPeticion.getPracticas()) {
+			peticion.getPracticas().add(mapear(practicaPeticion));
+		}
 		
 		return peticion;
 	}
 	
-	public Usuario mapear(UsuarioDTO unUsuario){
+	public static PeticionDTO mapear(Peticion unaPeticion){
+		PeticionDTO peticion = new PeticionDTO();
+		peticion.setPaciente(mapear(unaPeticion.getPaciente()));
+		peticion.setSucursal(mapear(unaPeticion.getSucursal()));
+		peticion.setObraSocial(unaPeticion.getObraSocial());
+		peticion.setIdPeticion(unaPeticion.getIdPeticion());
+		peticion.setEstado(unaPeticion.getEstado());
+		peticion.setFechaDeCarga(unaPeticion.getFechaDeCarga());
+		
+		for(PracticaPeticion practicaPeticion: unaPeticion.getPracticas()) {
+			peticion.getPracticas().add(mapear(practicaPeticion));
+		}
+		
+		return peticion;
+	}
+	
+	public static PracticaPeticion mapear(PracticaPeticionDTO practicaPeticion) {
+		PracticaPeticion practicaPeticionMapeada = new PracticaPeticion();
+		
+		practicaPeticionMapeada.setPractica(mapear(practicaPeticion.getPractica()));
+		practicaPeticionMapeada.setResultado(practicaPeticion.getResultado());
+		
+		return practicaPeticionMapeada;
+	}
+
+	public static PracticaPeticionDTO mapear(PracticaPeticion practicaPeticion) {
+		PracticaPeticionDTO practicaPeticionMapeada = new PracticaPeticionDTO();
+		
+		practicaPeticionMapeada.setPractica(mapear(practicaPeticion.getPractica()));
+		practicaPeticionMapeada.setResultado(practicaPeticion.getResultado());
+		
+		return practicaPeticionMapeada;
+	}
+	
+	public static Usuario mapear(UsuarioDTO unUsuario){
 		Usuario usuario = new Usuario();
 		usuario.setDni(unUsuario.getDni());
 		usuario.setNombre(unUsuario.getNombre());
@@ -66,7 +112,7 @@ public class ServicioMapeo {
 		return usuario;
 	}
 	
-	public UsuarioDTO mapear(Usuario unUsuario){
+	public static UsuarioDTO mapear(Usuario unUsuario){
 		UsuarioDTO usuario = new UsuarioDTO();
 		usuario.setDni(unUsuario.getDni());
 		usuario.setNombre(unUsuario.getNombre());
@@ -78,7 +124,7 @@ public class ServicioMapeo {
 		return usuario;
 	}
 	
-	public Practica mapear(PracticaDTO unaPracticaDTO){
+	public static Practica mapear(PracticaDTO unaPracticaDTO){
 		Practica unaPractica = new Practica();
 		unaPractica.setCodigo(unaPracticaDTO.getCodigo());
 		unaPractica.setNombre(unaPracticaDTO.getNombre());
@@ -122,7 +168,7 @@ public class ServicioMapeo {
 		return unaPractica;
 	}
 	
-	public PracticaDTO mapear(Practica unaPracticaDTO){
+	public static PracticaDTO mapear(Practica unaPracticaDTO){
 		PracticaDTO unaPractica = new PracticaDTO();
 		unaPractica.setCodigo(unaPracticaDTO.getCodigo());
 		unaPractica.setNombre(unaPracticaDTO.getNombre());
@@ -166,7 +212,7 @@ public class ServicioMapeo {
 		return unaPractica;
 	}
 	
-	public ValorResultado mapear(ValorResultadoDTO valorResultado){
+	public static ValorResultado mapear(ValorResultadoDTO valorResultado){
 		
 		if(valorResultado instanceof ValorDesdeHastaDTO) {
 			ValorDesdeHasta valorMapeado = new ValorDesdeHasta();
@@ -189,7 +235,7 @@ public class ServicioMapeo {
 		
 	}
 	
-	public SucursalDTO mapear(Sucursal unaSucursal){
+	public static SucursalDTO mapear(Sucursal unaSucursal){
 		SucursalDTO sucursalDTO = new SucursalDTO();
 		sucursalDTO.setDireccion(unaSucursal.getDireccion());
 		sucursalDTO.setNumero(unaSucursal.getNumero());
@@ -200,7 +246,7 @@ public class ServicioMapeo {
 		return sucursalDTO;
 	}
 	
-	public Sucursal mapear(SucursalDTO unaSucursal){
+	public static Sucursal mapear(SucursalDTO unaSucursal){
 		Sucursal sucursalDTO = new Sucursal();
 		sucursalDTO.setDireccion(unaSucursal.getDireccion());
 		sucursalDTO.setNumero(unaSucursal.getNumero());

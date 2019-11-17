@@ -9,7 +9,7 @@ import ar.com.IOO.SGP.modelo.ValorPositivoNegativo;
 import ar.com.IOO.SGP.modelo.ValorResultado;
 
 public abstract class ValorResultadoDAO extends BaseDAO<ValorResultado>{
-
+	
 	public ValorResultadoDAO(String nombreArchivo, Class<ValorResultado> typeParameterClass, String identificador) {
 		super(nombreArchivo, typeParameterClass, identificador);
 	}
