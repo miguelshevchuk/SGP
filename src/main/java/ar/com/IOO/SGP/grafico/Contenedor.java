@@ -18,6 +18,7 @@ import ar.com.IOO.SGP.grafico.practica.BajaPractica;
 import ar.com.IOO.SGP.grafico.practica.ModifPractica;
 import ar.com.IOO.SGP.grafico.sucursal.AltaSucursal;
 import ar.com.IOO.SGP.grafico.sucursal.BajaSucursal;
+import ar.com.IOO.SGP.grafico.sucursal.ModifSucursal;
 import ar.com.IOO.SGP.grafico.usuario.PanelAltaUsuario;
 import ar.com.IOO.SGP.grafico.usuario.PanelBajaUsuario;
 import ar.com.IOO.SGP.grafico.usuario.PanelModifUsuario;
@@ -115,6 +116,15 @@ public class Contenedor extends JFrame{
 		mnSucursales.add(mntmBaja_3);
 		
 		JMenuItem mntmModificacion_3 = new JMenuItem("Modificacion");
+		mntmModificacion_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ModifSucursal pantalla = new ModifSucursal();
+				pantalla.setSize(900, 500);
+				desktopPane.add(pantalla);
+				pantalla.setClosable(true);
+				pantalla.setVisible(true);
+			}
+		});
 		mnSucursales.add(mntmModificacion_3);
 		
 		JMenu mnPacientes = new JMenu("Pacientes");
