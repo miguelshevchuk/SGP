@@ -37,7 +37,7 @@ public class ServicioPeticiones extends ServicioBase{
 			ServicioResultados.getInstancia().alta(resultado);
 		}
 		
-		unaPeticion.setPracticas(null);
+		unaPeticion.getPracticas().clear();
 		PeticionDAO.getInstancia().altaPeticion(ServicioMapeo.mapear(unaPeticion));
 			
 	}

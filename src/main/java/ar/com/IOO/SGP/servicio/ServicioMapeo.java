@@ -79,6 +79,8 @@ public class ServicioMapeo {
 		
 		practicaPeticionMapeada.setPractica(mapear(practicaPeticion.getPractica()));
 		practicaPeticionMapeada.setResultado(practicaPeticion.getResultado());
+		practicaPeticionMapeada.setIdPeticion(practicaPeticion.getIdPeticion());
+		practicaPeticionMapeada.setIdResultado(practicaPeticion.getIdResultado());
 		
 		return practicaPeticionMapeada;
 	}
@@ -88,6 +90,8 @@ public class ServicioMapeo {
 		
 		practicaPeticionMapeada.setPractica(mapear(practicaPeticion.getPractica()));
 		practicaPeticionMapeada.setResultado(practicaPeticion.getResultado());
+		practicaPeticionMapeada.setIdPeticion(practicaPeticion.getIdPeticion());
+		practicaPeticionMapeada.setIdResultado(practicaPeticion.getIdResultado());
 		
 		return practicaPeticionMapeada;
 	}
@@ -133,35 +137,36 @@ public class ServicioMapeo {
 		unaPractica.setHabilitada(unaPracticaDTO.getHabilitada());
 		unaPractica.setTipoResultado(unaPracticaDTO.getTipoResultado());
 		
-		
-		if(unaPracticaDTO.getTipoResultado() == 1) {
-			ValorDesdeHasta valorCritico = new ValorDesdeHasta();
-			ValorDesdeHasta valorReservado = new ValorDesdeHasta();
-			
-			valorCritico.setCodigoPractica(unaPracticaDTO.getCodigo());
-			valorReservado.setCodigoPractica(unaPracticaDTO.getCodigo());
-			
-			valorCritico.setValorDesde(((ValorDesdeHastaDTO)unaPracticaDTO.getValoresCriticos()).getValorDesde());
-			valorCritico.setValorHasta(((ValorDesdeHastaDTO)unaPracticaDTO.getValoresCriticos()).getValorHasta());
-			
-			valorReservado.setValorDesde(((ValorDesdeHastaDTO)unaPracticaDTO.getValoresReservados()).getValorDesde());
-			valorReservado.setValorHasta(((ValorDesdeHastaDTO)unaPracticaDTO.getValoresReservados()).getValorHasta());
-			
-			unaPractica.setValoresCriticos(valorCritico);
-			unaPractica.setValoresReservados(valorReservado);
-		}else {
-			ValorPositivoNegativo valorCritico = new ValorPositivoNegativo();
-			ValorPositivoNegativo valorReservado = new ValorPositivoNegativo();
-			
-			valorCritico.setCodigoPractica(unaPracticaDTO.getCodigo());
-			valorReservado.setCodigoPractica(unaPracticaDTO.getCodigo());
-			
-			valorCritico.setValor(((ValorPositivoNegativoDTO)unaPracticaDTO.getValoresCriticos()).getValor());
-			
-			valorReservado.setValor(((ValorPositivoNegativoDTO)unaPracticaDTO.getValoresReservados()).getValor());
-			
-			unaPractica.setValoresCriticos(valorCritico);
-			unaPractica.setValoresReservados(valorReservado);
+		if(unaPracticaDTO.getTipoResultado() != null) {
+			if(unaPracticaDTO.getTipoResultado() == 1) {
+				ValorDesdeHasta valorCritico = new ValorDesdeHasta();
+				ValorDesdeHasta valorReservado = new ValorDesdeHasta();
+				
+				valorCritico.setCodigoPractica(unaPracticaDTO.getCodigo());
+				valorReservado.setCodigoPractica(unaPracticaDTO.getCodigo());
+				
+				valorCritico.setValorDesde(((ValorDesdeHastaDTO)unaPracticaDTO.getValoresCriticos()).getValorDesde());
+				valorCritico.setValorHasta(((ValorDesdeHastaDTO)unaPracticaDTO.getValoresCriticos()).getValorHasta());
+				
+				valorReservado.setValorDesde(((ValorDesdeHastaDTO)unaPracticaDTO.getValoresReservados()).getValorDesde());
+				valorReservado.setValorHasta(((ValorDesdeHastaDTO)unaPracticaDTO.getValoresReservados()).getValorHasta());
+				
+				unaPractica.setValoresCriticos(valorCritico);
+				unaPractica.setValoresReservados(valorReservado);
+			}else {
+				ValorPositivoNegativo valorCritico = new ValorPositivoNegativo();
+				ValorPositivoNegativo valorReservado = new ValorPositivoNegativo();
+				
+				valorCritico.setCodigoPractica(unaPracticaDTO.getCodigo());
+				valorReservado.setCodigoPractica(unaPracticaDTO.getCodigo());
+				
+				valorCritico.setValor(((ValorPositivoNegativoDTO)unaPracticaDTO.getValoresCriticos()).getValor());
+				
+				valorReservado.setValor(((ValorPositivoNegativoDTO)unaPracticaDTO.getValoresReservados()).getValor());
+				
+				unaPractica.setValoresCriticos(valorCritico);
+				unaPractica.setValoresReservados(valorReservado);
+			}
 		}
 		
 		

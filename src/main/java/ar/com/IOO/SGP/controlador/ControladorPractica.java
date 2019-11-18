@@ -72,4 +72,8 @@ public class ControladorPractica {
 		servicio.modificar(unaPractica);
 	}
 	
+	public List<PracticaDTO> buscarPracticasDel(Integer grupo) throws BaseException{
+		return servicio.buscarPracticasPor(grupo);
+	}
+	
 }

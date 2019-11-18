@@ -1,6 +1,7 @@
 package ar.com.IOO.SGP.grafico.practica;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
@@ -17,7 +18,6 @@ public class PracticaTableModel extends AbstractTableModel {
 	
 	public PracticaTableModel() throws BaseException
 	{
-		
 		this.lista.addAll(ControladorPractica.getInstancia().buscarPracticas());
 	}
 	public String getColumnName(int col) { return columnNames[col]; } 
@@ -47,6 +47,9 @@ public class PracticaTableModel extends AbstractTableModel {
 			default: return null; 
 		} 
 	}
+	public PracticaDTO getSeleccionado(int rowIndex) {
+		return lista.get(rowIndex);
+	}
 	
 	public void agregar(PracticaDTO practica)
 	{
@@ -58,5 +61,17 @@ public class PracticaTableModel extends AbstractTableModel {
 	{
 		lista.remove(fila);
 		fireTableDataChanged();
+	}
+	
+	public void limpiarTabla() {
+		lista.clear();
+		fireTableDataChanged();
+	}
+	
+	public void setLista(ArrayList<PracticaDTO> practicas) {
+		lista = practicas;
+	}
+	public List<PracticaDTO> getLista() {
+		return lista;
 	}
 }

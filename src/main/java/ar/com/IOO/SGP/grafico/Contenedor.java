@@ -13,6 +13,7 @@ import javax.swing.JMenuItem;
 import ar.com.IOO.SGP.grafico.paciente.AltaPaciente;
 import ar.com.IOO.SGP.grafico.paciente.BajaPaciente;
 import ar.com.IOO.SGP.grafico.paciente.ModifPaciente;
+import ar.com.IOO.SGP.grafico.peticion.AltaPeticion;
 import ar.com.IOO.SGP.grafico.practica.AltaPractica;
 import ar.com.IOO.SGP.grafico.practica.BajaPractica;
 import ar.com.IOO.SGP.grafico.practica.ModifPractica;
@@ -210,6 +211,15 @@ public class Contenedor extends JFrame{
 		menuBar.add(mnPeticiones);
 		
 		JMenuItem mntmAlta_4 = new JMenuItem("Alta");
+		mntmAlta_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AltaPeticion pantalla = new AltaPeticion();
+				pantalla.setSize(900, 600);
+				desktopPane.add(pantalla);
+				pantalla.setClosable(true);
+				pantalla.setVisible(true);
+			}
+		});
 		mnPeticiones.add(mntmAlta_4);
 		
 		JMenuItem mntmBaja_4 = new JMenuItem("Baja");

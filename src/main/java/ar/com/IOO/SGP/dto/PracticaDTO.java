@@ -11,6 +11,11 @@ public class PracticaDTO {
 	private Boolean habilitada;
 	private Integer tipoResultado;
 
+	public PracticaDTO() {}
+	public PracticaDTO(String codigo) {
+		this.codigo = codigo;
+	}
+	
 	public String getCodigo() {
 		return codigo;
 	}

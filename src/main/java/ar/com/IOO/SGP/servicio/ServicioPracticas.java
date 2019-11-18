@@ -84,4 +84,10 @@ public class ServicioPracticas extends ServicioBase{
 		ValorReservadoDAO.getInstancia().modificar(practica.getValoresReservados());
 		PracticaDAO.getInstancia().modificar(practica);
 	}
+	
+	public List<PracticaDTO> buscarPracticasPor(Integer grupo) throws BaseException {
+		return this.buscarPracticas().stream()
+				.filter(practica -> practica.getGrupo() == grupo)
+				.collect(Collectors.toList());
+	}
 }

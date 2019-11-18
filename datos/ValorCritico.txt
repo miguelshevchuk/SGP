@@ -1,1 +1,1 @@
-[{"valorDesde":10,"valorHasta":20,"codigoPractica":"1"}]
+[{"codigoPractica":"1"},{"codigoPractica":"2"},{"valor":false,"codigoPractica":"3"}]
