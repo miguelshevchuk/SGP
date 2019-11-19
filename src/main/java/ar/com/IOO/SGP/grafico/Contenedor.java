@@ -290,6 +290,11 @@ public class Contenedor extends JFrame{
 		});
 		mnResultados.add(mntmConsultarresultados);
 		
+		ElegirROL pantalla = new ElegirROL();
+		pantalla.setSize(900, 600);
+		desktopPane.add(pantalla);
+		pantalla.setClosable(true);
+		pantalla.setVisible(true);
 		
 	}
 }

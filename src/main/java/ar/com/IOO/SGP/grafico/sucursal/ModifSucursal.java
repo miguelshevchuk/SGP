@@ -106,7 +106,7 @@ public class ModifSucursal extends BasePanel {
 					mostrarOk();
 					panel.setVisible(false);
 					comboBox.enable();
-				} catch (ErrorGenericoException e1) {
+				} catch (BaseException e1) {
 					mostrarError(e1);
 				}
 			}

@@ -1,14 +1,19 @@
 package ar.com.IOO.SGP.modelo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Recepcionista extends Rol {
 
+	private List<String> tareasDisponibles = new ArrayList<String>();
+	
 	public Recepcionista() {
 		super("Recepcionista");
+		tareasDisponibles.add("modifPaciente");
+		tareasDisponibles.add("altaPaciente");
+		tareasDisponibles.add("altaPeticion");
+		tareasDisponibles.add("consResultados");
 	}
-
-	private List<String> tareasDisponibles;
 
 	@Override
 	public Boolean puedoRealizar(String unaTarea) {

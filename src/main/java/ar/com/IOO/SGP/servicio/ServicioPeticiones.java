@@ -12,6 +12,7 @@ import ar.com.IOO.SGP.dto.PracticaPeticionDTO;
 import ar.com.IOO.SGP.dto.SucursalDTO;
 import ar.com.IOO.SGP.excepcion.BaseException;
 import ar.com.IOO.SGP.excepcion.ErrorGenericoException;
+import ar.com.IOO.SGP.excepcion.PermisoDenegadoException;
 import ar.com.IOO.SGP.excepcion.RegistroExistenteException;
 import ar.com.IOO.SGP.modelo.Peticion;
 import ar.com.IOO.SGP.modelo.PracticaPeticion;
@@ -25,7 +26,9 @@ public class ServicioPeticiones extends ServicioBase{
 		return (instancia == null)? new ServicioPeticiones() : instancia;
 	}
 
-	public void altaPeticion(PeticionDTO unaPeticion) throws ErrorGenericoException, RegistroExistenteException{
+	public void altaPeticion(PeticionDTO unaPeticion) throws ErrorGenericoException, RegistroExistenteException, PermisoDenegadoException{
+		
+		this.puedeRealizar("altaPeticion");
 		
 		unaPeticion.setFechaDeCarga(new Date());
 		
@@ -39,7 +42,9 @@ public class ServicioPeticiones extends ServicioBase{
 			
 	}
 	
-	public void eliminar(String idPeticion) throws ErrorGenericoException{
+	public void eliminar(String idPeticion) throws ErrorGenericoException, PermisoDenegadoException{
+		this.puedeRealizar("bajaPeticion");
+		
 		ServicioResultados.getInstancia().eliminarResultadosDe(idPeticion);
 		PeticionDAO.getInstancia().bajaPeticion(idPeticion);
 		
@@ -47,7 +52,7 @@ public class ServicioPeticiones extends ServicioBase{
 	
 
 	public void modificarPeticion(PeticionDTO unaPeticion) throws BaseException{
-		
+		this.puedeRealizar("modifPeticion");
 		for(PracticaPeticionDTO resultado : unaPeticion.getPracticas()) {
 			resultado.setIdResultado(UUID.randomUUID().toString());
 			ServicioResultados.getInstancia().alta(resultado);
@@ -75,6 +80,8 @@ public class ServicioPeticiones extends ServicioBase{
 	}
 	
 	public List<PeticionDTO> buscarPeticionesConValoresCriticos() throws BaseException{
+		
+		this.puedeRealizar("consPeticionCriticas");
 		
 		List<Peticion> peticionesGuardadas = PeticionDAO.getInstancia().buscarPeticiones();
 		

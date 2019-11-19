@@ -5,6 +5,7 @@ import java.util.List;
 import ar.com.IOO.SGP.dto.PeticionDTO;
 import ar.com.IOO.SGP.excepcion.BaseException;
 import ar.com.IOO.SGP.excepcion.ErrorGenericoException;
+import ar.com.IOO.SGP.excepcion.PermisoDenegadoException;
 import ar.com.IOO.SGP.excepcion.TienePeticionesCompletasException;
 import ar.com.IOO.SGP.servicio.ServicioPeticiones;
 
@@ -44,7 +45,7 @@ public class ControladorPeticion {
 		servicio.modificarPeticion(peticion);
 	}
 	
-	public void eliminar(String idPeticion) throws ErrorGenericoException, TienePeticionesCompletasException {
+	public void eliminar(String idPeticion) throws ErrorGenericoException, TienePeticionesCompletasException, PermisoDenegadoException {
 		servicio.eliminar(idPeticion);
 	}
 	

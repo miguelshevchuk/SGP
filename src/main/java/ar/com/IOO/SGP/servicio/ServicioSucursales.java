@@ -8,6 +8,7 @@ import ar.com.IOO.SGP.dto.SucursalDTO;
 import ar.com.IOO.SGP.dto.UsuarioDTO;
 import ar.com.IOO.SGP.excepcion.BaseException;
 import ar.com.IOO.SGP.excepcion.ErrorGenericoException;
+import ar.com.IOO.SGP.excepcion.PermisoDenegadoException;
 import ar.com.IOO.SGP.excepcion.RegistroInexistenteException;
 import ar.com.IOO.SGP.excepcion.TienePeticionesCompletasException;
 import ar.com.IOO.SGP.modelo.Sucursal;
@@ -21,6 +22,8 @@ public class ServicioSucursales extends ServicioBase{
 	}
 	
 	public void alta(SucursalDTO unaSucursal) throws BaseException{
+		
+		this.puedeRealizar("altaSucursal");
 		
 		SucursalDAO.getInstancia().alta(ServicioMapeo.mapear(unaSucursal));
 		
@@ -55,12 +58,16 @@ public class ServicioSucursales extends ServicioBase{
 		sucursalDTO.setResponsableTecnico(responsable);
 	}
 	
-	public void modificar(SucursalDTO sucursal) throws ErrorGenericoException {
+	public void modificar(SucursalDTO sucursal) throws ErrorGenericoException, PermisoDenegadoException {
+		
+		this.puedeRealizar("modifSucursal");
 		
 		SucursalDAO.getInstancia().modificar(ServicioMapeo.mapear(sucursal));
 	}
 	
 	public void eliminar(String numero, String sucursalDestino) throws BaseException {
+		
+		this.puedeRealizar("bajaSucursal");
 		
 		SucursalDTO sucursalDTO = new SucursalDTO();
 		sucursalDTO.setNumero(numero);

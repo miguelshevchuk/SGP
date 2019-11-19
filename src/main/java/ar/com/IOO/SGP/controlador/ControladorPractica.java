@@ -7,6 +7,7 @@ import ar.com.IOO.SGP.dto.ComboDTO;
 import ar.com.IOO.SGP.dto.PracticaDTO;
 import ar.com.IOO.SGP.excepcion.BaseException;
 import ar.com.IOO.SGP.excepcion.ErrorGenericoException;
+import ar.com.IOO.SGP.excepcion.PermisoDenegadoException;
 import ar.com.IOO.SGP.excepcion.RegistroExistenteException;
 import ar.com.IOO.SGP.excepcion.RegistroInexistenteException;
 import ar.com.IOO.SGP.servicio.GrupoPracticaEnum;
@@ -52,7 +53,7 @@ public class ControladorPractica {
 		return grupos;
 	}
 	
-	public void alta(PracticaDTO unaPractica) throws ErrorGenericoException, RegistroExistenteException {
+	public void alta(PracticaDTO unaPractica) throws ErrorGenericoException, RegistroExistenteException, PermisoDenegadoException {
 		servicio.alta(unaPractica);
 	}
 	
@@ -68,7 +69,7 @@ public class ControladorPractica {
 		return servicio.buscar(unaPractica);
 	}
 	
-	public void modificar(PracticaDTO unaPractica) throws ErrorGenericoException, RegistroInexistenteException {
+	public void modificar(PracticaDTO unaPractica) throws ErrorGenericoException, RegistroInexistenteException, PermisoDenegadoException {
 		servicio.modificar(unaPractica);
 	}
 	

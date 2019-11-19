@@ -7,6 +7,7 @@ import ar.com.IOO.SGP.dao.ResultadoDAO;
 import ar.com.IOO.SGP.dto.PracticaPeticionDTO;
 import ar.com.IOO.SGP.excepcion.BaseException;
 import ar.com.IOO.SGP.excepcion.ErrorGenericoException;
+import ar.com.IOO.SGP.excepcion.PermisoDenegadoException;
 import ar.com.IOO.SGP.excepcion.RegistroExistenteException;
 import ar.com.IOO.SGP.excepcion.RegistroInexistenteException;
 import ar.com.IOO.SGP.excepcion.TieneResultadosReservadosException;
@@ -35,6 +36,9 @@ public class ServicioResultados extends ServicioBase {
 	}
 	public List<PracticaPeticionDTO> buscarResultadosNoReservadosDe(String unaPeticion) throws BaseException {
 		
+		
+		this.puedeRealizar("consResultados");
+		
 		Peticion peticion = ServicioMapeo.mapear(ServicioPeticiones.getInstancia().buscarPeticion(unaPeticion));
 		
 		if(peticion.esUnaPeticionReservada()) {
@@ -55,7 +59,8 @@ public class ServicioResultados extends ServicioBase {
 		ResultadoDAO.getInstancia().alta(ServicioMapeo.mapear(resultado));
 	}
 
-	public void modificar(PracticaPeticionDTO resultado) throws ErrorGenericoException, RegistroInexistenteException {
+	public void modificar(PracticaPeticionDTO resultado) throws ErrorGenericoException, RegistroInexistenteException, PermisoDenegadoException {
+		this.puedeRealizar("cargarResultado");
 		PracticaPeticion resultadoCargado = ResultadoDAO.getInstancia().buscarResultado(resultado.getIdResultado());
 		resultadoCargado.setResultado(resultado.getResultado());
 		ResultadoDAO.getInstancia().modificar(resultadoCargado);

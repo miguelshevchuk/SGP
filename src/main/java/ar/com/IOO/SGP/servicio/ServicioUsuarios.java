@@ -39,7 +39,8 @@ public class ServicioUsuarios extends ServicioBase{
 		
 	}
 	
-	public void eliminarUsuario(UsuarioDTO unUsuario) throws ErrorGenericoException {
+	public void eliminarUsuario(UsuarioDTO unUsuario) throws ErrorGenericoException, PermisoDenegadoException {
+		this.puedeRealizar("bajaUsuario");
 		UsuarioDAO.getInstancia().eliminar(ServicioMapeo.mapear(unUsuario));
 	}
 	
@@ -49,6 +50,8 @@ public class ServicioUsuarios extends ServicioBase{
 	}
 
 	public void modificar(UsuarioDTO unUsuario) throws BaseException {
+		this.puedeRealizar("modifUsuario");
+		
 		UsuarioDTO usuarioGuardado = this.buscarUsuario(unUsuario.getDni());
 		usuarioGuardado.setNombre(unUsuario.getNombre());
 		usuarioGuardado.setUserName(unUsuario.getUserName());

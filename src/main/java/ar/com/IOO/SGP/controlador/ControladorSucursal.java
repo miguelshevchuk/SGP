@@ -5,6 +5,7 @@ import java.util.List;
 import ar.com.IOO.SGP.dto.SucursalDTO;
 import ar.com.IOO.SGP.excepcion.BaseException;
 import ar.com.IOO.SGP.excepcion.ErrorGenericoException;
+import ar.com.IOO.SGP.excepcion.PermisoDenegadoException;
 import ar.com.IOO.SGP.servicio.ServicioSucursales;
 
 public class ControladorSucursal {
@@ -33,7 +34,7 @@ public class ControladorSucursal {
 		return servicio.buscarSucursal(numero);
 	}
 	
-	public void modificar(SucursalDTO sucursal) throws ErrorGenericoException {
+	public void modificar(SucursalDTO sucursal) throws ErrorGenericoException, PermisoDenegadoException {
 		servicio.modificar(sucursal);
 	}
 	

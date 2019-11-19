@@ -5,6 +5,7 @@ import java.util.List;
 import ar.com.IOO.SGP.dto.PracticaPeticionDTO;
 import ar.com.IOO.SGP.excepcion.BaseException;
 import ar.com.IOO.SGP.excepcion.ErrorGenericoException;
+import ar.com.IOO.SGP.excepcion.PermisoDenegadoException;
 import ar.com.IOO.SGP.excepcion.RegistroInexistenteException;
 import ar.com.IOO.SGP.servicio.ServicioResultados;
 
@@ -19,7 +20,7 @@ public class ControladorResultados {
 		return instancia;
 	}
 	
-	public void cargarResultado(PracticaPeticionDTO unResultado) throws ErrorGenericoException, RegistroInexistenteException {
+	public void cargarResultado(PracticaPeticionDTO unResultado) throws ErrorGenericoException, RegistroInexistenteException, PermisoDenegadoException {
 		ServicioResultados.getInstancia().modificar(unResultado);
 	}
 	

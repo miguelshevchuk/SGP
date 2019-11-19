@@ -9,6 +9,7 @@ import ar.com.IOO.SGP.dao.ValorReservadoDAO;
 import ar.com.IOO.SGP.dto.PracticaDTO;
 import ar.com.IOO.SGP.excepcion.BaseException;
 import ar.com.IOO.SGP.excepcion.ErrorGenericoException;
+import ar.com.IOO.SGP.excepcion.PermisoDenegadoException;
 import ar.com.IOO.SGP.excepcion.PracticaUsadaException;
 import ar.com.IOO.SGP.excepcion.RegistroExistenteException;
 import ar.com.IOO.SGP.excepcion.RegistroInexistenteException;
@@ -23,7 +24,9 @@ public class ServicioPracticas extends ServicioBase{
 		return (instancia == null)? new ServicioPracticas() : instancia;
 	}
 
-	public void alta(PracticaDTO unaPractica) throws ErrorGenericoException, RegistroExistenteException {
+	public void alta(PracticaDTO unaPractica) throws ErrorGenericoException, RegistroExistenteException, PermisoDenegadoException {
+		this.puedeRealizar("altaPractica");
+		
 		Practica practicaParaGuardar = ServicioMapeo.mapear(unaPractica);
 		
 		ValorCriticoDAO.getInstancia().insertar(practicaParaGuardar.getValoresCriticos());
@@ -52,6 +55,8 @@ public class ServicioPracticas extends ServicioBase{
 	
 	public void eliminar(String codigo) throws BaseException {
 		
+		this.puedeRealizar("bajaPractica");
+		
 		if(ServicioPeticiones.getInstancia().hayPeticionesDe(codigo)) {
 			throw new PracticaUsadaException();
 		}
@@ -71,7 +76,9 @@ public class ServicioPracticas extends ServicioBase{
 		return ServicioMapeo.mapear(practica);
 	}
 	
-	public void modificar(PracticaDTO unaPractica) throws ErrorGenericoException, RegistroInexistenteException {
+	public void modificar(PracticaDTO unaPractica) throws ErrorGenericoException, RegistroInexistenteException, PermisoDenegadoException {
+		this.puedeRealizar("modifPractica");
+		
 		Practica practica = PracticaDAO.getInstancia().buscar(unaPractica.getCodigo());
 		completarValoresPractica(practica);
 		

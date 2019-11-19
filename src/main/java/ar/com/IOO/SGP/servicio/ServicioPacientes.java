@@ -7,6 +7,7 @@ import ar.com.IOO.SGP.dao.PacienteDAO;
 import ar.com.IOO.SGP.dto.PacienteDTO;
 import ar.com.IOO.SGP.excepcion.BaseException;
 import ar.com.IOO.SGP.excepcion.ErrorGenericoException;
+import ar.com.IOO.SGP.excepcion.PermisoDenegadoException;
 import ar.com.IOO.SGP.excepcion.RegistroExistenteException;
 import ar.com.IOO.SGP.excepcion.RegistroInexistenteException;
 import ar.com.IOO.SGP.excepcion.TienePeticionesCompletasException;
@@ -22,6 +23,8 @@ public class ServicioPacientes extends ServicioBase{
 	
 	public void eliminar(String dniPaciente) throws BaseException{
 		
+		this.puedeRealizar("bajaPaciente");
+		
 		PacienteDTO paciente = new PacienteDTO();
 		paciente.setDni(dniPaciente);
 		
@@ -34,7 +37,9 @@ public class ServicioPacientes extends ServicioBase{
 		
 	}
 	
-	public void modificar(PacienteDTO paciente) throws ErrorGenericoException, RegistroInexistenteException{
+	public void modificar(PacienteDTO paciente) throws ErrorGenericoException, RegistroInexistenteException, PermisoDenegadoException{
+		
+		this.puedeRealizar("modifPaciente");
 		
 		PacienteDTO pacienteGuardado = this.buscarPaciente(paciente.getDni());
 		pacienteGuardado.setNombre(paciente.getNombre());
@@ -44,7 +49,8 @@ public class ServicioPacientes extends ServicioBase{
 		PacienteDAO.getInstancia().modificarPaciente(ServicioMapeo.mapear(pacienteGuardado));
 	}
 	
-	public void altaPaciente(PacienteDTO unPaciente) throws ErrorGenericoException, RegistroExistenteException{
+	public void altaPaciente(PacienteDTO unPaciente) throws ErrorGenericoException, RegistroExistenteException, PermisoDenegadoException{
+		this.puedeRealizar("altaPaciente");
 		PacienteDAO.getInstancia().altaPaciente(ServicioMapeo.mapear(unPaciente));
 	}
 	
