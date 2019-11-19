@@ -13,6 +13,10 @@ public class Practica {
 	public Boolean esValorReservado(Object unValor) {
 		return this.valoresReservados.cumpleValor(unValor);
 	}
+	
+	public Boolean esValorCritico(Object unValor) {
+		return this.valoresCriticos.cumpleValor(unValor);
+	}
 
 	public String getCodigo() {
 		return codigo;

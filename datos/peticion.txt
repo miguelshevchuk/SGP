@@ -1,1 +1,1 @@
-[{"paciente":{"dni":"1"},"obraSocial":"osde","fechaDeCarga":"Nov 18, 2019 10:34:13 AM","practicas":[],"idPeticion":"edca3ca4-46b1-4702-a22f-e33d3696d41d","sucursal":{"numero":"4","direccion":"Otra direccion loca","responsableTecnico":{"dni":"2"}}}]
+[{"paciente":{"dni":"34556342"},"obraSocial":"lala","fechaDeCarga":"Nov 18, 2019 11:04:35 PM","practicas":[],"idPeticion":"1","sucursal":{"numero":"2","direccion":"lala 991","responsableTecnico":{"dni":"2"}}}]

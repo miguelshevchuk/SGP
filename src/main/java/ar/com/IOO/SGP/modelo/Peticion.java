@@ -31,17 +31,25 @@ public class Peticion {
 	public Boolean tieneAlgunaPracticaConResultadoReservado() {
 		return this.practicas.stream().anyMatch(practica -> practica.tieneResultadoReservado());
 	}
+	
+	public Boolean esUnaPeticionCritica() {
+		return tieneAlgunaPracticaConResultadoCritico();
+	}
+	
+	public Boolean tieneAlgunaPracticaConResultadoCritico() {
+		return this.practicas.stream().anyMatch(practica -> practica.tieneResultadoCritico());
+	}
 
 	public Boolean tiene(String unaPractica) {
-		return this.practicas.stream().anyMatch(practicaPeticion -> practicaPeticion.getPractica().getCodigo() == unaPractica);
+		return this.practicas.stream().anyMatch(practicaPeticion -> practicaPeticion.getPractica().getCodigo().equals(unaPractica));
 	}
 	
 	public Boolean laPeticionEsDelPaciente(String unPaciente) {
-		return this.paciente.getDni() == unPaciente;
+		return this.paciente.getDni().equals(unPaciente);
 	}
 	
 	public Boolean laPeticionEsDeLaSucursal(String numeroSucursal) {
-		return this.sucursal.getNumero() == numeroSucursal;
+		return this.sucursal.getNumero().equals(numeroSucursal);
 	}
 	
 	// GETTERS Y SETTERS

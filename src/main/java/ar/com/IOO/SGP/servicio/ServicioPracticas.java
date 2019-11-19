@@ -56,8 +56,10 @@ public class ServicioPracticas extends ServicioBase{
 			throw new PracticaUsadaException();
 		}
 		
-		ValorCriticoDAO.getInstancia().eliminar(codigo);
-		ValorReservadoDAO.getInstancia().eliminar(codigo);
+		Practica practica = PracticaDAO.getInstancia().buscar(codigo);
+		
+		ValorCriticoDAO.getInstancia().eliminar(practica);
+		ValorReservadoDAO.getInstancia().eliminar(practica);
 		PracticaDAO.getInstancia().eliminar(codigo);
 	}
 	
@@ -87,7 +89,7 @@ public class ServicioPracticas extends ServicioBase{
 	
 	public List<PracticaDTO> buscarPracticasPor(Integer grupo) throws BaseException {
 		return this.buscarPracticas().stream()
-				.filter(practica -> practica.getGrupo() == grupo)
+				.filter(practica -> (practica.getGrupo() == grupo) && practica.getHabilitada())
 				.collect(Collectors.toList());
 	}
 }

@@ -1,1 +1,1 @@
-[{"codigoPractica":"1"},{"codigoPractica":"2"},{"valor":false,"codigoPractica":"3"}]
+[{"valorDesde":10,"valorHasta":20,"codigoPractica":"1"},{"valor":false,"codigoPractica":"2"},{"valor":false,"codigoPractica":"3"},{"valorDesde":1,"valorHasta":10,"codigoPractica":"4"},{"valorDesde":50,"valorHasta":100,"codigoPractica":"5"},{"valorDesde":80,"valorHasta":90,"codigoPractica":"6"},{"valorDesde":20,"valorHasta":30,"codigoPractica":"7"}]

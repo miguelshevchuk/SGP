@@ -7,7 +7,21 @@ public class PracticaPeticion {
 	private Object resultado;
 
 	public Boolean tieneResultadoReservado() {
-		return this.practica.esValorReservado(this.resultado);
+		if(this.resultado == null) {
+			return Boolean.FALSE;
+		}else {
+			return this.practica.esValorReservado(this.resultado);
+		}
+//		return this.resultado != null && this.practica.esValorReservado(this.resultado);
+	}
+	
+	public Boolean tieneResultadoCritico() {
+		if(this.resultado == null) {
+			return Boolean.FALSE;
+		}else {
+			return this.practica.esValorCritico(this.resultado);
+		}
+//		return this.resultado != null && this.practica.esValorReservado(this.resultado);
 	}
 
 	// GETTERS Y SETTERS

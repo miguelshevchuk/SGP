@@ -189,6 +189,29 @@ public abstract class BaseDAO<TIPO> {
 		
 	}
 	
+	protected <T> void eliminarRegistro(String idRegistro, Class<T> tipo) throws ErrorGenericoException{
+		try {
+			Method getterId = tipoDeDato.getMethod("get"+this.identificador);
+			
+			List<T> registrosGuardados = this.traerRegistros(tipo);
+			
+			registrosGuardados.removeIf(registro -> this.esElMismoRegistro(registro, idRegistro, getterId));
+			
+			escribirEnArchivo(registrosGuardados);
+			
+		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
+			throw new ErrorGenericoException();
+		} catch (SecurityException e) {
+			e.printStackTrace();
+			throw new ErrorGenericoException();
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+			throw new ErrorGenericoException();
+		}
+		
+	}
+	
 	protected Object traerRegistroPor(String id) throws ErrorGenericoException, RegistroInexistenteException {
 		
 //		try {

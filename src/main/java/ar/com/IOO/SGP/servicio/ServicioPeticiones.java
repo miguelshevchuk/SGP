@@ -28,12 +28,9 @@ public class ServicioPeticiones extends ServicioBase{
 	public void altaPeticion(PeticionDTO unaPeticion) throws ErrorGenericoException, RegistroExistenteException{
 		
 		unaPeticion.setFechaDeCarga(new Date());
-		unaPeticion.setIdPeticion(UUID.randomUUID().toString());
-		
 		
 		for(PracticaPeticionDTO resultado : unaPeticion.getPracticas()) {
 			resultado.setIdResultado(UUID.randomUUID().toString());
-			resultado.setIdPeticion(unaPeticion.getIdPeticion());
 			ServicioResultados.getInstancia().alta(resultado);
 		}
 		
@@ -49,9 +46,19 @@ public class ServicioPeticiones extends ServicioBase{
 	}
 	
 
-	public void modificarPeticion(PeticionDTO unaPeticion) throws ErrorGenericoException{
-		unaPeticion.setPracticas(null);
-		PeticionDAO.getInstancia().modificarPeticion(ServicioMapeo.mapear(unaPeticion));
+	public void modificarPeticion(PeticionDTO unaPeticion) throws BaseException{
+		
+		for(PracticaPeticionDTO resultado : unaPeticion.getPracticas()) {
+			resultado.setIdResultado(UUID.randomUUID().toString());
+			ServicioResultados.getInstancia().alta(resultado);
+		}
+		unaPeticion.getPracticas().clear();
+		
+		PeticionDTO peticionGuardada = buscarPeticion(unaPeticion.getIdPeticion());
+		peticionGuardada.setObraSocial(unaPeticion.getObraSocial());
+		peticionGuardada.setSucursal(unaPeticion.getSucursal());
+		
+		PeticionDAO.getInstancia().modificarPeticion(ServicioMapeo.mapear(peticionGuardada));
 		
 	}
 	
@@ -64,6 +71,18 @@ public class ServicioPeticiones extends ServicioBase{
 		}
 		
 		return peticionesGuardadas.stream().map(peticion -> ServicioMapeo.mapear(peticion))
+				.collect(Collectors.toList());
+	}
+	
+	public List<PeticionDTO> buscarPeticionesConValoresCriticos() throws BaseException{
+		
+		List<Peticion> peticionesGuardadas = PeticionDAO.getInstancia().buscarPeticiones();
+		
+		for(Peticion peticion: peticionesGuardadas) {
+			this.completarPeticion(peticion);
+		}
+		
+		return peticionesGuardadas.stream().filter(peticion -> peticion.esUnaPeticionCritica()).map(peticion -> ServicioMapeo.mapear(peticion))
 				.collect(Collectors.toList());
 	}
 	
@@ -154,5 +173,6 @@ public class ServicioPeticiones extends ServicioBase{
 		}
 	}
 
+	
 	
 }

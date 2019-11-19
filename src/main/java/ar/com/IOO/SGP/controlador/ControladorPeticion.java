@@ -30,16 +30,22 @@ public class ControladorPeticion {
 		return servicio.buscarPeticiones();
 	}
 	
+	public List<PeticionDTO> buscarPeticionesConValoresCriticos() throws BaseException {
+		
+		return servicio.buscarPeticionesConValoresCriticos();
+	}
+	
 	public PeticionDTO buscarpeticion(String idPeticion) throws BaseException {
 		
 		return servicio.buscarPeticion(idPeticion);
 	}
 	
-	public void modificar(PeticionDTO peticion) throws ErrorGenericoException {
+	public void modificar(PeticionDTO peticion) throws BaseException {
 		servicio.modificarPeticion(peticion);
 	}
 	
 	public void eliminar(String idPeticion) throws ErrorGenericoException, TienePeticionesCompletasException {
 		servicio.eliminar(idPeticion);
 	}
+	
 }

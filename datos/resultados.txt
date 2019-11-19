@@ -1,1 +1,1 @@
-[{"idPeticion":"edca3ca4-46b1-4702-a22f-e33d3696d41d","idResultado":"cc0d3df1-41ec-4343-b086-fed132123c00","practica":{"codigo":"2"}},{"idPeticion":"edca3ca4-46b1-4702-a22f-e33d3696d41d","idResultado":"49449208-26d2-48e1-8b29-c41a05a3ac81","practica":{"codigo":"2"}}]
+[{"idPeticion":"1","idResultado":"609026fa-5004-4270-9885-565ea8423e90","practica":{"codigo":"1"},"resultado":"15"}]

@@ -60,7 +60,7 @@ public class BajaPaciente extends BasePanel {
 					
 					try {
 						ControladorPaciente.getInstancia().eliminar(dni);
-						table.setModel(new PacienteTableModel());
+						pacienteTableModel.eliminar(fila);
 						mostrarOk();
 					} catch (BaseException e1) {
 						mostrarError(e1);

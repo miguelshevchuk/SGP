@@ -33,6 +33,7 @@ public class AltaPeticion extends BasePanel {
 	private JTable tablaParaElegir;
 	PracticaTableModel practicasParaElegir;
 	PracticaTableModel practicasElegidas;
+	private JTextField idPeticion;
 
 	/**
 	 * Launch the application.
@@ -65,20 +66,20 @@ public class AltaPeticion extends BasePanel {
 		} catch (BaseException e) {
 			mostrarError(e);
 		} 
-		pacientes.setBounds(6, 55, 196, 27);
+		pacientes.setBounds(265, 55, 207, 27);
 		getContentPane().add(pacientes);
 		
 		JLabel lblPaciente = new JLabel("Paciente");
-		lblPaciente.setBounds(6, 27, 61, 16);
+		lblPaciente.setBounds(265, 27, 61, 16);
 		getContentPane().add(lblPaciente);
 		
 		obraSocial = new JTextField();
-		obraSocial.setBounds(265, 54, 207, 26);
+		obraSocial.setBounds(509, 54, 207, 26);
 		getContentPane().add(obraSocial);
 		obraSocial.setColumns(10);
 		
 		JLabel lblObraSocial = new JLabel("Obra social");
-		lblObraSocial.setBounds(265, 27, 122, 16);
+		lblObraSocial.setBounds(509, 27, 122, 16);
 		getContentPane().add(lblObraSocial);
 		
 		JComboBox sucursal = new JComboBox();
@@ -122,6 +123,10 @@ public class AltaPeticion extends BasePanel {
 			mostrarError(e2);
 		}
 		
+		idPeticion = new JTextField();
+		idPeticion.setBounds(6, 54, 189, 26);
+		getContentPane().add(idPeticion);
+		idPeticion.setColumns(10);
 		
 		JButton btnCargar = new JButton("Cargar");
 		btnCargar.addActionListener(new ActionListener() {
@@ -137,11 +142,13 @@ public class AltaPeticion extends BasePanel {
 				for(PracticaDTO practica: peticionesElegidas) {
 					PracticaPeticionDTO resultado = new PracticaPeticionDTO();
 					resultado.setPractica(new PracticaDTO(practica.getCodigo()));
+					resultado.setIdPeticion(idPeticion.getText());
 					resultados.add(resultado);
 				}
 				
 				nuevaPeticion.setPracticas(resultados);
 				nuevaPeticion.setSucursal((SucursalDTO)sucursal.getSelectedItem());
+				nuevaPeticion.setIdPeticion(idPeticion.getText());
 				
 				try {
 					ControladorPeticion.getInstancia().alta(nuevaPeticion);
@@ -185,7 +192,10 @@ public class AltaPeticion extends BasePanel {
 				ComboDTO grupoElegido = (ComboDTO) grupo.getSelectedItem();
 				try {
 					List<PracticaDTO> practicasDelGrupo = ControladorPractica.getInstancia().buscarPracticasDel(grupoElegido.getCodigo());
-					practicasParaElegir.setLista((ArrayList<PracticaDTO>) practicasDelGrupo);
+					practicasParaElegir.getLista().clear();
+					for(PracticaDTO practica: practicasDelGrupo) {
+						practicasParaElegir.agregar(practica);
+					}
 				} catch (BaseException e1) {
 					mostrarError(e1);
 				}
@@ -204,6 +214,11 @@ public class AltaPeticion extends BasePanel {
 		JLabel lblSucursal = new JLabel("Sucursal");
 		lblSucursal.setBounds(265, 95, 61, 16);
 		getContentPane().add(lblSucursal);
+		
+		
+		JLabel lblIdentificador = new JLabel("Identificador");
+		lblIdentificador.setBounds(6, 27, 137, 16);
+		getContentPane().add(lblIdentificador);
 
 	}
 }

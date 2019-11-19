@@ -33,7 +33,7 @@ public class ResultadoDAO extends BaseDAO<PracticaPeticion>{
 	}
 	
 	public List<PracticaPeticion> buscarResultadosDe(String unaPeticion) throws ErrorGenericoException {
-		return super.traerRegistros().stream().filter(resultado -> resultado.getIdPeticion() == unaPeticion)
+		return super.traerRegistros().stream().filter(resultado -> resultado.getIdPeticion().equals(unaPeticion))
 				.collect(Collectors.toList());
 	}
 	

@@ -79,5 +79,11 @@ public class PracticaDTO {
 	public void setTipoResultado(Integer tipoResultado) {
 		this.tipoResultado = tipoResultado;
 	}
+	@Override
+	public String toString() {
+		return this.codigo+" - "+this.nombre;
+	}
+	
+	
 
 }

@@ -79,4 +79,11 @@ public class PeticionDTO {
 		this.sucursal = sucursal;
 	}
 
+	@Override
+	public String toString() {
+		return this.idPeticion + " - "+this.getPaciente().getNombre();
+	}
+	
+	
+
 }

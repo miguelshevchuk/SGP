@@ -7,7 +7,7 @@ public class ValorDesdeHasta extends ValorResultado{
 
 	public Boolean cumpleValor(Object unValor){
 		
-		return ((Integer)unValor >= valorDesde) && ((Integer)unValor <= valorHasta) ;
+		return (Integer.parseInt(unValor.toString()) >= valorDesde) && (Integer.parseInt(unValor.toString()) <= valorHasta) ;
 	}
 	
 	public Integer getValorDesde() {

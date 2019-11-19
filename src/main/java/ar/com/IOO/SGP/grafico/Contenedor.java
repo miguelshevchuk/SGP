@@ -14,6 +14,11 @@ import ar.com.IOO.SGP.grafico.paciente.AltaPaciente;
 import ar.com.IOO.SGP.grafico.paciente.BajaPaciente;
 import ar.com.IOO.SGP.grafico.paciente.ModifPaciente;
 import ar.com.IOO.SGP.grafico.peticion.AltaPeticion;
+import ar.com.IOO.SGP.grafico.peticion.AltaResultado;
+import ar.com.IOO.SGP.grafico.peticion.BajaPeticion;
+import ar.com.IOO.SGP.grafico.peticion.ConsCriticos;
+import ar.com.IOO.SGP.grafico.peticion.ConsultarResultados;
+import ar.com.IOO.SGP.grafico.peticion.ModifPeticion;
 import ar.com.IOO.SGP.grafico.practica.AltaPractica;
 import ar.com.IOO.SGP.grafico.practica.BajaPractica;
 import ar.com.IOO.SGP.grafico.practica.ModifPractica;
@@ -223,25 +228,67 @@ public class Contenedor extends JFrame{
 		mnPeticiones.add(mntmAlta_4);
 		
 		JMenuItem mntmBaja_4 = new JMenuItem("Baja");
+		mntmBaja_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				BajaPeticion pantalla = new BajaPeticion();
+				pantalla.setSize(900, 600);
+				desktopPane.add(pantalla);
+				pantalla.setClosable(true);
+				pantalla.setVisible(true);
+			}
+		});
 		mnPeticiones.add(mntmBaja_4);
 		
 		JMenuItem mntmModificacion_4 = new JMenuItem("Modificacion");
+		mntmModificacion_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ModifPeticion pantalla = new ModifPeticion();
+				pantalla.setSize(900, 600);
+				desktopPane.add(pantalla);
+				pantalla.setClosable(true);
+				pantalla.setVisible(true);
+			}
+		});
 		mnPeticiones.add(mntmModificacion_4);
 		
-		JMenuItem mntmConsulta = new JMenuItem("Consulta");
-		mnPeticiones.add(mntmConsulta);
+		JMenuItem mntmConsultarCriticos = new JMenuItem("Consultar criticos");
+		mntmConsultarCriticos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ConsCriticos pantalla = new ConsCriticos();
+				pantalla.setSize(900, 600);
+				desktopPane.add(pantalla);
+				pantalla.setClosable(true);
+				pantalla.setVisible(true);
+			}
+		});
+		mnPeticiones.add(mntmConsultarCriticos);
 		
 		JMenu mnResultados = new JMenu("Resultados");
 		menuBar.add(mnResultados);
 		
-		JMenuItem mntmAlta_5 = new JMenuItem("Alta");
+		JMenuItem mntmAlta_5 = new JMenuItem("Cargar Resultados");
+		mntmAlta_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AltaResultado pantalla = new AltaResultado();
+				pantalla.setSize(900, 600);
+				desktopPane.add(pantalla);
+				pantalla.setClosable(true);
+				pantalla.setVisible(true);
+			}
+		});
 		mnResultados.add(mntmAlta_5);
 		
-		JMenuItem mntmBaja_5 = new JMenuItem("Baja");
-		mnResultados.add(mntmBaja_5);
-		
-		JMenuItem mntmModificacion_5 = new JMenuItem("Modificacion");
-		mnResultados.add(mntmModificacion_5);
+		JMenuItem mntmConsultarresultados = new JMenuItem("Consultar Resultados");
+		mntmConsultarresultados.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ConsultarResultados pantalla = new ConsultarResultados();
+				pantalla.setSize(900, 600);
+				desktopPane.add(pantalla);
+				pantalla.setClosable(true);
+				pantalla.setVisible(true);
+			}
+		});
+		mnResultados.add(mntmConsultarresultados);
 		
 		
 	}

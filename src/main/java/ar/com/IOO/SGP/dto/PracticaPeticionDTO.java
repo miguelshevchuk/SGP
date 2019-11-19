@@ -39,4 +39,10 @@ public class PracticaPeticionDTO {
 		this.idResultado = idResultado;
 	}
 
+	@Override
+	public String toString() {
+		return this.getPractica().getCodigo() + " - "+this.getPractica().getNombre();
+	}
+
+	
 }
